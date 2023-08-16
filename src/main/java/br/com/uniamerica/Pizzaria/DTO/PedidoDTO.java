@@ -1,7 +1,12 @@
 package br.com.uniamerica.Pizzaria.DTO;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
 
+@Getter
+@Setter
 public class PedidoDTO{
     private Long idPedido;
     private LocalDateTime dataDoPedido;
