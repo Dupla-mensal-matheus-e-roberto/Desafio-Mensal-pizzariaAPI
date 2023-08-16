@@ -1,4 +1,7 @@
 package br.com.uniamerica.Pizzaria.Repository;
 
-public interface VendaRepository {
+import br.com.uniamerica.Pizzaria.Entity.Venda;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface VendaRepository extends JpaRepository<Venda, Long> {
 }
