@@ -1,6 +1,10 @@
 package br.com.uniamerica.Pizzaria.DTO;
 
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class VendaDTO{
     private Long idVenda;
     private String tipoPagamento;
