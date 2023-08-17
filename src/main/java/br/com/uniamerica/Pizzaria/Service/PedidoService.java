@@ -43,11 +43,16 @@ public class PedidoService {
     }
 
     public void editar(PedidoDTO pedidoDTO, Long id){
-        pedido = toPedido(pedidoDTO);
-
         pedido = this.pedidoRepository.findById(id).orElse(null);
 
         Assert.isTrue(pedido != null, "Pedido Inválido");
+
+        Assert.isTrue(pedidoDTO != null, "Pedido Inválido");
+
+        pedido.setDataDoPedido(pedidoDTO.getDataDoPedido());
+        pedido.setStatus(pedidoDTO.getStatus());
+        pedido.setIdProduto(pedidoDTO.getIdProduto());
+        pedido.setIdCliente(pedidoDTO.getIdCliente());
 
         this.pedidoRepository.save(pedido);
     }
@@ -62,10 +67,11 @@ public class PedidoService {
 
     public PedidoDTO toPedidoDto(Pedido pedido){
         pedidoDTO = new PedidoDTO();
+        pedidoDTO.setIdCliente(pedido.getIdCliente());
         pedidoDTO.setDataDoPedido(pedido.getDataDoPedido());
         pedidoDTO.setStatus(pedido.getStatus());
         pedidoDTO.setIdProduto(pedido.getIdProduto());
-        pedidoDTO.setIdCliente(pedidoDTO.getIdCliente());
+        pedidoDTO.setIdCliente(pedido.getIdCliente());
 
         return pedidoDTO;
     }
