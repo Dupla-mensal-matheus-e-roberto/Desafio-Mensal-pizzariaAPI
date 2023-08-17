@@ -44,11 +44,16 @@ public class PizzaService {
     }
 
     public void editar(PizzaDTO pizzaDTO, Long id){
-        pizza = toPizza(pizzaDTO);
-
         pizza = this.pizzaRepository.findById(id).orElse(null);
 
-        Assert.isTrue(pizza != null, "Pizza Inválido");
+        Assert.isTrue(pizza != null, "Pizza Inválida");
+
+        Assert.isTrue(pizzaDTO != null, "Pizza Inválida");
+
+        pizza.setAdicionais(pizzaDTO.getAdicionais());
+        pizza.setRemoviveis(pizzaDTO.getRemoviveis());
+        pizza.setTamanho(pizzaDTO.getTamanho());
+        pizza.setSabores(pizzaDTO.getSabores());
 
         this.pizzaRepository.save(pizza);
     }
@@ -63,6 +68,7 @@ public class PizzaService {
 
     public PizzaDTO toPizzaDto(Pizza pizza){
         pizzaDTO = new PizzaDTO();
+        pizzaDTO.setIdPizza(pizza.getIdPizza());
         pizzaDTO.setAdicionais(pizza.getAdicionais());
         pizzaDTO.setRemoviveis(pizza.getRemoviveis());
         pizzaDTO.setTamanho(pizza.getTamanho());
