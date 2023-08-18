@@ -29,7 +29,7 @@ public class Pedido {
 
     public Pedido(Long idPedido, LocalDateTime dataDoPedido, String status, Long idCliente, Long idProduto) {
         this.idPedido = idPedido;
-        this.dataDoPedido = dataDoPedido;
+        this.dataDoPedido = LocalDateTime.now();
         this.status = status;
         this.idCliente = idCliente;
         this.idProduto = idProduto;
