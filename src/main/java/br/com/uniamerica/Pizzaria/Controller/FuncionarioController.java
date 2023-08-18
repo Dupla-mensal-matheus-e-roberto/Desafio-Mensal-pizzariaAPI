@@ -20,7 +20,7 @@ import java.util.List;
  * */
 
 @RestController
-@RequestMapping("/api/funcionario")
+@RequestMapping("/funcionario")
 public class FuncionarioController {
 
     @Autowired
@@ -35,9 +35,20 @@ public class FuncionarioController {
 
     }
 
+    /*[+] Get By Id [+]*/
+
+    @GetMapping("/findById/{id}")
+    public ResponseEntity<FuncionarioDTO> findById(@PathVariable("id") Long id){
+        try{
+            return ResponseEntity.ok(this.funcionarioService.findById(id));
+        } catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
+
     /* [+] CADASTRAR [+] */
 
-    @PostMapping
+    @PostMapping("/criar")
     public ResponseEntity<String> createFuncionario(@RequestBody FuncionarioDTO funcionario){
         try{
             return ResponseEntity.ok(funcionarioService.createFuncionario(funcionario));
@@ -48,7 +59,7 @@ public class FuncionarioController {
 
     /* [+] ATUALIZAR [+] */
 
-    @PutMapping("/{id}")
+    @PutMapping("/editar/{id}")
     public ResponseEntity<Funcionario> updateFuncionario(@PathVariable Long id, @RequestBody Funcionario funcionario){
        if(!id.equals(funcionario.getId_funcionario())) {
         return ResponseEntity.badRequest().build();
@@ -57,6 +68,7 @@ public class FuncionarioController {
     }
 
     /* [+] DELETAR [+] */
+    @DeleteMapping("/deletar/{id}")
     public ResponseEntity<String> deleteFuncionario(@PathVariable Long id){
         try {
             funcionarioService.deleteFuncionario(id);

@@ -19,7 +19,7 @@ import java.util.List;
 * */
 
 @RestController
-@RequestMapping("/api/cliente")
+@RequestMapping("/cliente")
 public class ClienteController {
 
     @Autowired
@@ -45,7 +45,7 @@ public class ClienteController {
 
     /* [+] CADASTRAR [+]  */
 
-    @PostMapping
+    @PostMapping("/criar")
     public ResponseEntity<String> createClient(@RequestBody ClienteDTO cliente) {
         try {
             return ResponseEntity.ok(clientService.createCliente(cliente));
@@ -57,7 +57,7 @@ public class ClienteController {
 
     /* [+] ATUALIZAR [+] */
 
-    @PutMapping("/{id}")
+    @PutMapping("/editar/{id}")
     public ResponseEntity<Cliente> updateClient(@PathVariable Long id, @RequestBody Cliente cliente) {
         if (!id.equals(cliente.getId_cliente())) {
             return ResponseEntity.badRequest().build();
@@ -67,7 +67,7 @@ public class ClienteController {
 
     /* [+] DELETAR [+] */
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deletar/{id}")
     public ResponseEntity<Void> deleteClient(@PathVariable Long id) {
         clientService.deleteCliente(id);
         return ResponseEntity.noContent().build();

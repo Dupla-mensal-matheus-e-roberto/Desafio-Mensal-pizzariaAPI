@@ -5,6 +5,7 @@ package br.com.uniamerica.Pizzaria.Controller;
 * Endpoint para operações relacionadas a Usuários do sistema
 * */
 
+import br.com.uniamerica.Pizzaria.DTO.ClienteDTO;
 import br.com.uniamerica.Pizzaria.DTO.UsuarioDTO;
 
 import br.com.uniamerica.Pizzaria.Entity.Usuario;
@@ -18,7 +19,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/usuarios")
+@RequestMapping("/usuario")
 public class UsuarioController {
 
     @Autowired
@@ -33,9 +34,20 @@ public class UsuarioController {
 
     }
 
+    /*[+] Get By Id [+]*/
+
+    @GetMapping("/findById/{id}")
+    public ResponseEntity<UsuarioDTO> findById(@PathVariable("id") Long id){
+        try{
+            return ResponseEntity.ok(this.usuarioService.findById(id));
+        } catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
+
     /* [+] CADASTRAR [+] */
 
-    @PostMapping
+    @PostMapping("/criar")
     public ResponseEntity<String> createUsuario(@RequestBody UsuarioDTO usuario){
         try{
             return ResponseEntity.ok(usuarioService.createUsuario(usuario));
@@ -46,7 +58,7 @@ public class UsuarioController {
 
     /* [+] ATUALIZAR [+] */
 
-    @PutMapping("/{id}")
+    @PutMapping("/editar/{id}")
     public ResponseEntity<Usuario> updateUsuario(@PathVariable Long id, @RequestBody Usuario usuario){
         if(!id.equals(usuario.getId_usuario())) {
             return ResponseEntity.badRequest().build();
@@ -56,6 +68,7 @@ public class UsuarioController {
 
     /* [+] DELETAR [+] */
 
+    @DeleteMapping("/deletar/{id}")
     public ResponseEntity<String> deleteUsuario(@PathVariable Long id){
         try {
             usuarioService.deleteUsuario(id);
