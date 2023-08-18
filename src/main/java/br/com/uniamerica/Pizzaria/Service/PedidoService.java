@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,7 +79,7 @@ public class PedidoService {
 
     public Pedido toPedido(PedidoDTO pedidoDTO){
         pedido = new Pedido();
-        pedido.setDataDoPedido(pedidoDTO.getDataDoPedido());
+        pedido.setDataDoPedido(LocalDateTime.now());
         pedido.setStatus(pedidoDTO.getStatus());
         pedido.setIdProduto(pedidoDTO.getIdProduto());
         pedido.setIdCliente(pedidoDTO.getIdCliente());
