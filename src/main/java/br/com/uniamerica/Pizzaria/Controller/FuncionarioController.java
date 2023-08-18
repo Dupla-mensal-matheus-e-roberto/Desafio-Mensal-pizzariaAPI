@@ -28,7 +28,7 @@ public class FuncionarioController {
 
     /* [+] Get All [+] */
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<FuncionarioDTO>> getAllFuncionarios(){
 
         return ResponseEntity.ok(funcionarioService.getAllFuncionarios());
