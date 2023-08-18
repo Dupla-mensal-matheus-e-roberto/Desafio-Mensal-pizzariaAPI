@@ -8,22 +8,49 @@ import lombok.Setter;
 @Table(name = "usuarios")
 public class Usuario {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id_funcionario")
-    private Long id_funcionario;
-
     @Getter @Setter
-    @Column(name="nome")
-    private String nome;
-
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id_usuario")
     private Long id_usuario;
 
+    @Getter @Setter
+    @Column(name="login")
+    private String login;
+
+    @Getter @Setter
+    @Column(name="senha")
+    private String senha;
+
     public Usuario(){}
 
-    public Usuario(Long id_funcionario, String nome, Long id_usuario) {
-        this.id_funcionario = id_funcionario;
-        this.nome = nome;
+
+    public Usuario(Long id_usuario, String login, String senha) {
         this.id_usuario = id_usuario;
+        this.login = login;
+        this.senha = senha;
+    }
+
+    public Long getId_usuario() {
+        return id_usuario;
+    }
+
+    public void setId_usuario(Long id_usuario) {
+        this.id_usuario = id_usuario;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 }
