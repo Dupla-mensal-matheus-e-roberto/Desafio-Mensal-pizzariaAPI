@@ -6,19 +6,42 @@ import lombok.Setter;
 
 public class FuncionarioDTO {
 
-    private int id_funcionario;
+    private Long id_funcionario;
 
     @Getter @Setter
     private String nome;
 
-    private int id_usuario;
+    private Long id_usuario;
 
     public FuncionarioDTO(){}
 
-    public FuncionarioDTO(int id_funcionario, String nome, int id_usuario) {
+    public FuncionarioDTO(Long id_funcionario, String nome, Long id_usuario) {
         this.id_funcionario = id_funcionario;
         this.nome = nome;
         this.id_usuario = id_usuario;
     }
 
+    public Long getId_funcionario() {
+        return id_funcionario;
+    }
+
+    public void setId_funcionario(Long id_funcionario) {
+        this.id_funcionario = id_funcionario;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public Long getId_usuario() {
+        return id_usuario;
+    }
+
+    public void setId_usuario(Long id_usuario) {
+        this.id_usuario = id_usuario;
+    }
 }

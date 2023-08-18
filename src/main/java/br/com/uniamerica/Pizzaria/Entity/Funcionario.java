@@ -26,4 +26,28 @@ public class Funcionario {
         this.nome = nome;
         this.id_usuario = id_usuario;
     }
+
+    public Long getId_funcionario() {
+        return id_funcionario;
+    }
+
+    public void setId_funcionario(Long id_funcionario) {
+        this.id_funcionario = id_funcionario;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public Long getId_usuario() {
+        return id_usuario;
+    }
+
+    public void setId_usuario(Long id_usuario) {
+        this.id_usuario = id_usuario;
+    }
 }
