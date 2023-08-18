@@ -11,7 +11,7 @@ public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_cliente")
-    private int id_cliente;
+    private Long id_cliente;
 
     @Getter @Setter
     @Column(name = "nome")
@@ -22,11 +22,11 @@ public class Cliente {
     private String endereco;
 
     @Column(name = "id_usuario")
-    private int id_usuario;
+    private Long id_usuario;
 
     public Cliente(){}
 
-    public Cliente(int id_cliente, String nome, String endereco, int id_usuario) {
+    public Cliente(Long id_cliente, String nome, String endereco, Long id_usuario) {
         this.id_cliente = id_cliente;
         this.nome = nome;
         this.endereco = endereco;
