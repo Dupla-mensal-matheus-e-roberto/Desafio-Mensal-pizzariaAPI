@@ -1,4 +1,7 @@
 package br.com.uniamerica.Pizzaria.Repository;
 
-public interface FuncionarioRepository {
+import br.com.uniamerica.Pizzaria.Entity.Funcionario;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface FuncionarioRepository extends JpaRepository<Funcionario, Long> {
 }

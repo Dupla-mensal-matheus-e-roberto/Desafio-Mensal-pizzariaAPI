@@ -9,6 +9,7 @@ import lombok.Setter;
 @Table(name = "clientes", schema = "public")
 public class Cliente {
     @Id
+    @Getter
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_cliente")
     private Long id_cliente;
