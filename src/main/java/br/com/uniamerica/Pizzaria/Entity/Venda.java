@@ -16,16 +16,16 @@ public class Venda {
     @Column(name = "tipo_pagamento")
     private String tipoPagamento;
     @Column(name = "id_pedido")
-    private Long idPedido;
+    private Pedido idPedido;
     @Column(name = "tipo_entrega")
     private String tipoEntrega;
     @Column(name = "id_funcionario")
-    private Long idFuncionario;
+    private Funcionario idFuncionario;
 
     public Venda() {
     }
 
-    public Venda(Long idVenda, String tipoPagamento, Long idPedido, String tipoEntrega, Long idFuncionario) {
+    public Venda(Long idVenda, String tipoPagamento, Pedido idPedido, String tipoEntrega, Funcionario idFuncionario) {
         this.idVenda = idVenda;
         this.tipoPagamento = tipoPagamento;
         this.idPedido = idPedido;

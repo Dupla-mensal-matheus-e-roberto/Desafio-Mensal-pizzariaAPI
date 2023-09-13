@@ -20,14 +20,14 @@ public class Pedido {
     @Column(name = "status")
     private String status;
     @Column(name = "id_cliente")
-    private Long idCliente;
+    private Cliente idCliente;
     @Column(name = "id_produto")
-    private Long idProduto;
+    private Produto idProduto;
 
     public Pedido() {
     }
 
-    public Pedido(Long idPedido, LocalDateTime dataDoPedido, String status, Long idCliente, Long idProduto) {
+    public Pedido(Long idPedido, LocalDateTime dataDoPedido, String status, Cliente idCliente, Produto idProduto) {
         this.idPedido = idPedido;
         this.dataDoPedido = LocalDateTime.now();
         this.status = status;
