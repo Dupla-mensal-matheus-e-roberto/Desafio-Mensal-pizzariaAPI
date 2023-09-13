@@ -32,4 +32,5 @@ public class Venda {
         this.tipoEntrega = tipoEntrega;
         this.idFuncionario = idFuncionario;
     }
+
 }
