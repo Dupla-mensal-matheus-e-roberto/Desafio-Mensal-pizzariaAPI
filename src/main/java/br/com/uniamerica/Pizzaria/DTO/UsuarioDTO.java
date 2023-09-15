@@ -4,15 +4,11 @@ package br.com.uniamerica.Pizzaria.DTO;
 import lombok.Getter;
 import lombok.Setter;
 
+@Getter
+@Setter
 public class UsuarioDTO {
-
-    @Getter @Setter
     private Long id_usuario;
-
-    @Getter @Setter
     private String login;
-
-    @Getter @Setter
     private String senha;
 
     public UsuarioDTO(){}

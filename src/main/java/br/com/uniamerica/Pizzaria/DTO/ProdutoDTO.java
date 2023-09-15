@@ -1,5 +1,6 @@
 package br.com.uniamerica.Pizzaria.DTO;
 
+import br.com.uniamerica.Pizzaria.Entity.Pizza;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,13 +8,13 @@ import lombok.Setter;
 @Setter
 public class ProdutoDTO{
     private Long idProduto;
-    private Long idPizza;
+    private Pizza idPizza;
     private String acompanhamentos;
 
     public ProdutoDTO() {
     }
 
-    public ProdutoDTO(Long idProduto, Long idPizza, String acompanhamentos) {
+    public ProdutoDTO(Long idProduto, Pizza idPizza, String acompanhamentos) {
         this.idProduto = idProduto;
         this.idPizza = idPizza;
         this.acompanhamentos = acompanhamentos;
