@@ -1,13 +1,18 @@
 package br.com.uniamerica.Pizzaria.Entity;
 
+
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
-@Table(name = "usuarios")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "usuarios", schema = "public")
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,13 +22,11 @@ public class Usuario {
     private String login;
     @Column(name="senha")
     private String senha;
-
-    public Usuario(){}
-
-
-    public Usuario(Long id_usuario, String login, String senha) {
-        this.id_usuario = id_usuario;
-        this.login = login;
-        this.senha = senha;
-    }
+    @OneToOne
+    @JoinColumn(name = "id_usuario")
+    private Cliente cliente;
+    @OneToOne
+    @JoinColumn(name = "id_usuario")
+    private Funcionario funcionario;
 }
+

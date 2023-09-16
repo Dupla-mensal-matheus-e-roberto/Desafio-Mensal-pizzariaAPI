@@ -1,13 +1,17 @@
 package br.com.uniamerica.Pizzaria.Entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "pizzas", schema = "public")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Pizza {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,15 +25,7 @@ public class Pizza {
     private String adicionais;
     @Column(name = "removiveis")
     private String removiveis;
-
-    public Pizza() {
-    }
-
-    public Pizza(Long idPizza, String sabores, String tamanho, String adicionais, String removiveis) {
-        this.idPizza = idPizza;
-        this.sabores = sabores;
-        this.tamanho = tamanho;
-        this.adicionais = adicionais;
-        this.removiveis = removiveis;
-    }
+    @OneToOne
+    @JoinColumn(name = "id_pizza")
+    private Produto produto;
 }

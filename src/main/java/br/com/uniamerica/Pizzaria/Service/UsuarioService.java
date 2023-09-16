@@ -1,9 +1,7 @@
 package br.com.uniamerica.Pizzaria.Service;
 
 
-import br.com.uniamerica.Pizzaria.DTO.FuncionarioDTO;
 import br.com.uniamerica.Pizzaria.DTO.UsuarioDTO;
-import br.com.uniamerica.Pizzaria.Entity.Funcionario;
 import br.com.uniamerica.Pizzaria.Entity.Usuario;
 import br.com.uniamerica.Pizzaria.Repository.UsuarioRepository;
 import jakarta.persistence.EntityNotFoundException;

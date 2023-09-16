@@ -1,15 +1,20 @@
 package br.com.uniamerica.Pizzaria.Entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "pedidos", schema = "public")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,19 +24,12 @@ public class Pedido {
     private LocalDateTime dataDoPedido;
     @Column(name = "status")
     private String status;
-    @Column(name = "id_cliente")
-    private Cliente idCliente;
-    @Column(name = "id_produto")
-    private Produto idProduto;
+    @ManyToOne
+    @JoinColumn(name = "id_cliente")
+    private Cliente cliente;
+    @OneToMany(mappedBy = "pedido")
+    private List<Produto> produtos;
+    @OneToMany(mappedBy = "pedido")
+    private List<Venda> vendas;
 
-    public Pedido() {
-    }
-
-    public Pedido(Long idPedido, LocalDateTime dataDoPedido, String status, Cliente idCliente, Produto idProduto) {
-        this.idPedido = idPedido;
-        this.dataDoPedido = LocalDateTime.now();
-        this.status = status;
-        this.idCliente = idCliente;
-        this.idProduto = idProduto;
-    }
 }

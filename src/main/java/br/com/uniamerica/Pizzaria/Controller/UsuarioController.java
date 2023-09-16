@@ -5,7 +5,6 @@ package br.com.uniamerica.Pizzaria.Controller;
 * Endpoint para operações relacionadas a Usuários do sistema
 * */
 
-import br.com.uniamerica.Pizzaria.DTO.ClienteDTO;
 import br.com.uniamerica.Pizzaria.DTO.UsuarioDTO;
 
 import br.com.uniamerica.Pizzaria.Entity.Usuario;
