@@ -41,12 +41,18 @@ public class ClienteService {
 
     }
 
-    public Cliente updateCliente(Cliente client) {
-        return clienteRepository.save(client);
+    public String updateCliente(ClienteDTO clienteDTO) {
+
+        Cliente clienteTmp = toCliente(clienteDTO);
+
+        clienteRepository.save(clienteTmp);
+
+        return "Cliente editado com sucesso";
     }
 
-    public void deleteCliente(Long id) {
+    public String deleteCliente(Long id) {
         clienteRepository.deleteById(id);
+        return "Cliente deletado com sucesso";
     }
 
     public ClienteDTO toDTO(Cliente cliente){
@@ -54,7 +60,6 @@ public class ClienteService {
         clienteDto.setIdCliente(cliente.getIdCliente());
         clienteDto.setNome(cliente.getNome());
         clienteDto.setEndereco(cliente.getEndereco());
-        clienteDto.setIdUsuario(cliente.getIdUsuario());
         return clienteDto;
     }
 
@@ -63,7 +68,6 @@ public class ClienteService {
         novoCliente.setIdCliente(clienteDTO.getIdCliente());
         novoCliente.setNome(clienteDTO.getNome());
         novoCliente.setEndereco(clienteDTO.getEndereco());
-        novoCliente.setIdUsuario(clienteDTO.getIdUsuario());
         return novoCliente;
     }
 

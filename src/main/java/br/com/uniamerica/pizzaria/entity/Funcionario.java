@@ -21,10 +21,12 @@ public class Funcionario {
     private Long idFuncionario;
     @Column(name = "nome")
     private String nome;
-    @OneToOne
-    @JoinColumn(name = "id_usuario")
-    private Usuario idUsuario;
+    @Column(name = "login")
+    private String login;
+    @Column(name = "senha")
+    private String senha;
     @OneToMany(mappedBy = "funcionario")
     private List<Venda> vendas;
+
 
 }

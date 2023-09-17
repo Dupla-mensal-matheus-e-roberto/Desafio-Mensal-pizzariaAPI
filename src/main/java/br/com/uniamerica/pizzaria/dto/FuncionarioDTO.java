@@ -1,10 +1,12 @@
 package br.com.uniamerica.pizzaria.dto;
 
-import br.com.uniamerica.pizzaria.entity.Usuario;
+import br.com.uniamerica.pizzaria.entity.Venda;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -13,6 +15,8 @@ import lombok.Setter;
 public class FuncionarioDTO {
     private Long idFuncionario;
     private String nome;
-    private Usuario idUsuario;
+    private String login;
+    private String senha;
+    private List<Venda> vendas;
 
 }

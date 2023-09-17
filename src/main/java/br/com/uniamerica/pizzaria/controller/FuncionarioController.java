@@ -58,7 +58,7 @@ public class FuncionarioController {
     /* [+] ATUALIZAR [+] */
 
     @PutMapping("/editar/{id}")
-    public ResponseEntity<Funcionario> updateFuncionario(@PathVariable Long id, @RequestBody Funcionario funcionario){
+    public ResponseEntity<String> updateFuncionario(@PathVariable Long id, @RequestBody FuncionarioDTO funcionario){
        if(!id.equals(funcionario.getIdFuncionario())) {
         return ResponseEntity.badRequest().build();
        }
