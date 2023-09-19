@@ -136,17 +136,27 @@ class PizzariaApplicationTests {
 
 	@Test
 	void testePedidoCriar(){
-		List<Pedido> pedidos = new ArrayList<>();
-		List<Venda> vendas = new ArrayList<>();
 		List<Produto> produtos = new ArrayList<>();
+		List<Pedido> pedidos = new ArrayList<>();
 		Cliente cliente = new Cliente(1L, "Cliente", "endereco 1", "login", "senha", pedidos);
-
-		PedidoDTO pedido = new PedidoDTO(1L, LocalDateTime.now(), "Preparando", cliente, produtos, vendas);
+		var pedido = pedidoControler.criar(new PedidoDTO(1L, LocalDateTime.now(), "Preparando", cliente, produtos));
+		Assert.assertEquals("Pedido cadastrado com sucesso", pedido.getBody());
 	}
 
-	void testePedidoEditar(){}
+	@Test
+	void testePedidoEditar(){
+		List<Pedido> pedidos = new ArrayList<>();
+		List<Produto> produtos = new ArrayList<>();
+		Cliente cliente = new Cliente(1L, "Cliente", "endereco 1", "login", "senha", pedidos);
+		var pedido = pedidoControler.editar(new PedidoDTO(1L, LocalDateTime.now(), "Preparando", cliente, produtos), 1L);
+		Assert.assertEquals("Pedido editado com sucesso", pedido.getBody());
+	}
 
-	void testePedidoDeletar(){}
+	@Test
+	void testePedidoDeletar(){
+		var pedido = pedidoControler.deletar(2L);
+		Assert.assertEquals("Pedido deletado com sucesso", pedido.getBody());
+	}
 
 	void testePedidoFindById(){}
 
