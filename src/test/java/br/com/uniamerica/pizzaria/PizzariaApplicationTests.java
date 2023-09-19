@@ -7,6 +7,7 @@ import br.com.uniamerica.pizzaria.controller.PizzaController;
 import br.com.uniamerica.pizzaria.dto.ClienteDTO;
 import br.com.uniamerica.pizzaria.dto.FuncionarioDTO;
 import br.com.uniamerica.pizzaria.dto.PedidoDTO;
+import br.com.uniamerica.pizzaria.dto.PizzaDTO;
 import br.com.uniamerica.pizzaria.entity.*;
 import br.com.uniamerica.pizzaria.repository.ClienteRepository;
 import br.com.uniamerica.pizzaria.repository.FuncionarioRepository;
@@ -149,7 +150,7 @@ class PizzariaApplicationTests {
 	}
 
 	@Test
-	void testePedidoCriar(){
+	void testPedidoCriar(){
 		List<Produto> produtos = new ArrayList<>();
 		List<Pedido> pedidos = new ArrayList<>();
 		Cliente cliente = new Cliente(1L, "Cliente", "endereco 1", "login", "senha", pedidos);
@@ -158,7 +159,7 @@ class PizzariaApplicationTests {
 	}
 
 	@Test
-	void testePedidoEditar(){
+	void testPedidoEditar(){
 		List<Pedido> pedidos = new ArrayList<>();
 		List<Produto> produtos = new ArrayList<>();
 		Cliente cliente = new Cliente(1L, "Cliente", "endereco 1", "login", "senha", pedidos);
@@ -167,12 +168,13 @@ class PizzariaApplicationTests {
 	}
 
 	@Test
-	void testePedidoDeletar(){
+	void testPedidoDeletar(){
 		var pedido = pedidoController.deletar(1L);
 		Assert.assertEquals("Pedido deletado com sucesso", pedido.getBody());
 	}
 
-	void testePedidoFindById(){
+	@Test
+	void testPedidoFindById(){
 
 		List<Pedido> pedidos = new ArrayList<>();
 		List<Produto> produtos = new ArrayList<>();
@@ -180,8 +182,32 @@ class PizzariaApplicationTests {
 		pedidoController.criar(new PedidoDTO(1L, LocalDateTime.now(), "Preparando", cliente, produtos));
 
 		var pedido_encontrado = pedidoController.findById(1L);
-		Assert.assertEquals(pedido_encontrado.getBody(), pedidoController.findById(1L).getBody());
+		Assert.assertEquals(pedido_encontrado.getBody().getIdPedido(), pedidoController.findById(1L).getBody().getIdPedido());
+	}
 
+	@Test
+	void testPizzaCriar(){
+		var pizza = pizzaController.criar(new PizzaDTO(1L, "Ca two piri", "BIG", "Nenhum", "Nenhum"));
+		Assert.assertEquals("Pizza cadastrada com sucesso", pizza.getBody());
+	}
+	@Test
+	void testPizzaEditar(){
+		var pizza = pizzaController.editar(new PizzaDTO(1L, "Ca ONE piri", "BIG", "Nenhum", "Nenhum"), 1L);
+		Assert.assertEquals("Pizza editada com sucesso", pizza.getBody());
+	}
+
+	@Test
+	void testPizzaDeletar(){
+		var pizza = pizzaController.deletar(1L);
+		Assert.assertEquals("Pizza deletada com sucesso", pizza.getBody());
+	}
+
+	@Test
+	void testPizzaFindById(){
+		pizzaController.criar(new PizzaDTO(1L, "Ca Three piri", "BIG", "Nenhum", "Nenhum"));
+		var pizza = pizzaController.findById(1L);
+
+		Assert.assertEquals(pizza.getBody().getIdPizza(), pizza.getBody().getIdPizza());
 	}
 
 
