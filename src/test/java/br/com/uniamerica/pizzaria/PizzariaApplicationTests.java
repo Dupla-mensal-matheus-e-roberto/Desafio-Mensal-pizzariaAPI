@@ -3,6 +3,7 @@ package br.com.uniamerica.pizzaria;
 import br.com.uniamerica.pizzaria.controller.ClienteController;
 import br.com.uniamerica.pizzaria.controller.FuncionarioController;
 import br.com.uniamerica.pizzaria.controller.PedidoController;
+import br.com.uniamerica.pizzaria.controller.PizzaController;
 import br.com.uniamerica.pizzaria.dto.ClienteDTO;
 import br.com.uniamerica.pizzaria.dto.FuncionarioDTO;
 import br.com.uniamerica.pizzaria.dto.PedidoDTO;
@@ -10,9 +11,11 @@ import br.com.uniamerica.pizzaria.entity.*;
 import br.com.uniamerica.pizzaria.repository.ClienteRepository;
 import br.com.uniamerica.pizzaria.repository.FuncionarioRepository;
 import br.com.uniamerica.pizzaria.repository.PedidoRepository;
+import br.com.uniamerica.pizzaria.repository.PizzaRepository;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -37,13 +40,19 @@ class PizzariaApplicationTests {
 	@MockBean
 	PedidoRepository pedidoRepository;
 	@Autowired
-	PedidoController pedidoControler;
+	PedidoController pedidoController;
+	@MockBean
+	PizzaRepository pizzaRepository;
+	@Autowired
+	PizzaController pizzaController;
 
 	@BeforeEach
 	void injectData(){
 		List<Pedido> pedidos = new ArrayList<>();
 		List<Venda> vendas = new ArrayList<>();
 		List<Produto> produtos = new ArrayList<>();
+
+		Produto produto = new Produto();
 
 		Cliente cliente = new Cliente(1L, "Cliente", "endereco 1", "login", "senha", pedidos);
 		Cliente cliente2 = new Cliente(2L, "Cliente2", "endereco 1", "login", "senha",pedidos);
@@ -54,6 +63,8 @@ class PizzariaApplicationTests {
 		Pedido pedido = new Pedido(1L, LocalDateTime.now(), "Preparando", cliente, produtos, vendas );
 		Pedido pedido2 = new Pedido(2L, LocalDateTime.now(), "Preparando", cliente, produtos, vendas );
 
+		Pizza pizza = new Pizza(1L, "Ca two piri", "BIG", "Nenhum", "Nenhum", produto);
+		Pizza pizza2 = new Pizza(2L, "Ca two piri", "BIG", "Nenhum", "Nenhum", produto);
 
 		// Cliente
 		Mockito.when(clienteRepository.save(cliente)).thenReturn(cliente);
@@ -64,14 +75,17 @@ class PizzariaApplicationTests {
 		//Funcionario
 		Mockito.when(funcionarioRepository.save(funcionario)).thenReturn(funcionario);
 		Mockito.when(funcionarioRepository.save(funcionario2)).thenReturn(funcionario2);
-		//Mockito.when(funcionarioRepository.save(funcionario3)).thenReturn(funcionario3);
 		Mockito.when(funcionarioRepository.findById(1L)).thenReturn(Optional.of(funcionario));
 
 		//Pedido
 		Mockito.when(pedidoRepository.save(pedido)).thenReturn(pedido);
 		Mockito.when(pedidoRepository.save(pedido2)).thenReturn(pedido2);
 		Mockito.when(pedidoRepository.findById(1L)).thenReturn(Optional.of(pedido));
+
 		// Pizza
+		Mockito.when(pizzaRepository.save(pizza)).thenReturn(pizza);
+		Mockito.when(pizzaRepository.save(pizza2)).thenReturn(pizza2);
+		Mockito.when(pizzaRepository.findById(1L)).thenReturn(Optional.of(pizza));
 
 		// Produto
 
@@ -139,7 +153,7 @@ class PizzariaApplicationTests {
 		List<Produto> produtos = new ArrayList<>();
 		List<Pedido> pedidos = new ArrayList<>();
 		Cliente cliente = new Cliente(1L, "Cliente", "endereco 1", "login", "senha", pedidos);
-		var pedido = pedidoControler.criar(new PedidoDTO(1L, LocalDateTime.now(), "Preparando", cliente, produtos));
+		var pedido = pedidoController.criar(new PedidoDTO(1L, LocalDateTime.now(), "Preparando", cliente, produtos));
 		Assert.assertEquals("Pedido cadastrado com sucesso", pedido.getBody());
 	}
 
@@ -148,17 +162,27 @@ class PizzariaApplicationTests {
 		List<Pedido> pedidos = new ArrayList<>();
 		List<Produto> produtos = new ArrayList<>();
 		Cliente cliente = new Cliente(1L, "Cliente", "endereco 1", "login", "senha", pedidos);
-		var pedido = pedidoControler.editar(new PedidoDTO(1L, LocalDateTime.now(), "Preparando", cliente, produtos), 1L);
+		var pedido = pedidoController.editar(new PedidoDTO(1L, LocalDateTime.now(), "Preparando", cliente, produtos), 1L);
 		Assert.assertEquals("Pedido editado com sucesso", pedido.getBody());
 	}
 
 	@Test
 	void testePedidoDeletar(){
-		var pedido = pedidoControler.deletar(2L);
+		var pedido = pedidoController.deletar(1L);
 		Assert.assertEquals("Pedido deletado com sucesso", pedido.getBody());
 	}
 
-	void testePedidoFindById(){}
+	void testePedidoFindById(){
+
+		List<Pedido> pedidos = new ArrayList<>();
+		List<Produto> produtos = new ArrayList<>();
+		Cliente cliente = new Cliente(1L, "Cliente", "endereco 1", "login", "senha", pedidos);
+		pedidoController.criar(new PedidoDTO(1L, LocalDateTime.now(), "Preparando", cliente, produtos));
+
+		var pedido_encontrado = pedidoController.findById(1L);
+		Assert.assertEquals(pedido_encontrado.getBody(), pedidoController.findById(1L).getBody());
+
+	}
 
 
 }
