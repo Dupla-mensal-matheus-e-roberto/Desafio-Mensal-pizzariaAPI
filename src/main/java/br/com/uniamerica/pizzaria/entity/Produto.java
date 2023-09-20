@@ -18,7 +18,7 @@ public class Produto {
     @Column(name = "id_produto")
     private Long idProduto;
     @OneToOne(mappedBy = "produto")
-    private Pizza idPizza;
+    private Pizza pizza;
     @Column(name = "acompanhamentos")
     private String acompanhamentos;
     @ManyToOne

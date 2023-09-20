@@ -46,7 +46,7 @@ public class ProdutoService {
         Assert.isTrue( produto != null, "Produto Inválido");
 
         produto.setAcompanhamentos(produtoDTO.getAcompanhamentos());
-        produto.setIdPizza(produtoDTO.getIdPizza());
+        produto.setPizza(produtoDTO.getPizza());
 
         this.produtoRepository.save(produto);
     }
@@ -62,14 +62,14 @@ public class ProdutoService {
     public ProdutoDTO toProdutoDto(Produto produto){
         ProdutoDTO produtoDTO = new ProdutoDTO();
         produtoDTO.setIdProduto(produto.getIdProduto());
-        produtoDTO.setIdPizza(produto.getIdPizza());
+        produtoDTO.setPizza(produto.getPizza());
         produtoDTO.setAcompanhamentos(produto.getAcompanhamentos());
 
         return produtoDTO;
     }
     public Produto toProduto(ProdutoDTO produtoDTO){
         produto = new Produto();
-        produto.setIdPizza(produtoDTO.getIdPizza());
+        produto.setPizza(produtoDTO.getPizza());
         produto.setAcompanhamentos(produtoDTO.getAcompanhamentos());
 
         return produto;

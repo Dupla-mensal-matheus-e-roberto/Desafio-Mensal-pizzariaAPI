@@ -24,8 +24,8 @@ public class Cliente {
     private String nome;
     @Column(name = "endereco")
     private String endereco;
-    @Column(name = "login")
-    private String login;
+    @Column(name = "username")
+    private String username;
     @Column(name = "senha")
     private String senha;
     @OneToMany(mappedBy = "cliente")

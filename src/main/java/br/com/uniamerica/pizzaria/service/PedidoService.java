@@ -47,7 +47,7 @@ public class PedidoService {
         pedido.setDataDoPedido(pedidoDTO.getDataDoPedido());
         pedido.setStatus(pedidoDTO.getStatus());
         pedido.setProdutos(pedidoDTO.getProdutos());
-        pedido.setCliente(pedidoDTO.getIdCliente());
+        pedido.setCliente(pedidoDTO.getCliente());
 
         this.pedidoRepository.save(pedido);
     }
@@ -62,11 +62,10 @@ public class PedidoService {
 
     public PedidoDTO toPedidoDto(Pedido pedido){
         PedidoDTO pedidoDTO = new PedidoDTO();
-        pedidoDTO.setIdCliente(pedido.getCliente());
+        pedidoDTO.setCliente(pedido.getCliente());
         pedidoDTO.setDataDoPedido(pedido.getDataDoPedido());
         pedidoDTO.setStatus(pedido.getStatus());
         pedidoDTO.setProdutos(pedido.getProdutos());
-        pedidoDTO.setIdCliente(pedido.getCliente());
 
         return pedidoDTO;
     }
@@ -76,7 +75,7 @@ public class PedidoService {
         pedido.setDataDoPedido(LocalDateTime.now());
         pedido.setStatus(pedidoDTO.getStatus());
         pedido.setProdutos(pedidoDTO.getProdutos());
-        pedido.setCliente(pedidoDTO.getIdCliente());
+        pedido.setCliente(pedidoDTO.getCliente());
 
         return pedido;
     }

@@ -49,8 +49,8 @@ public class VendaService {
 
         Assert.isTrue(vendaDTO != null, "Venda Inválida");
 
-        venda.setFuncionario(vendaDTO.getIdFuncionario());
-        venda.setPedido(vendaDTO.getIdPedido());
+        venda.setFuncionario(vendaDTO.getFuncionario());
+        venda.setPedido(vendaDTO.getPedido());
         venda.setTipoEntrega(vendaDTO.getTipoEntrega());
         venda.setTipoPagamento(vendaDTO.getTipoPagamento());
 
@@ -68,8 +68,8 @@ public class VendaService {
     public VendaDTO toVendaDto(Venda venda){
         VendaDTO vendaDTO = new VendaDTO();
         vendaDTO.setIdVenda(venda.getIdVenda());
-        vendaDTO.setIdFuncionario(venda.getFuncionario());
-        vendaDTO.setIdPedido(venda.getPedido());
+        vendaDTO.setFuncionario(venda.getFuncionario());
+        vendaDTO.setPedido(venda.getPedido());
         vendaDTO.setTipoEntrega(venda.getTipoEntrega());
         vendaDTO.setTipoPagamento(venda.getTipoPagamento());
 
@@ -78,8 +78,8 @@ public class VendaService {
 
     public Venda toVenda(VendaDTO vendaDTO){
         venda = new Venda();
-        venda.setFuncionario(vendaDTO.getIdFuncionario());
-        venda.setPedido(vendaDTO.getIdPedido());
+        venda.setFuncionario(vendaDTO.getFuncionario());
+        venda.setPedido(vendaDTO.getPedido());
         venda.setTipoEntrega(vendaDTO.getTipoEntrega());
         venda.setTipoPagamento(vendaDTO.getTipoPagamento());
 

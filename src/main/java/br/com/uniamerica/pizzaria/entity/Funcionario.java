@@ -21,8 +21,8 @@ public class Funcionario {
     private Long idFuncionario;
     @Column(name = "nome")
     private String nome;
-    @Column(name = "login")
-    private String login;
+    @Column(name = "username")
+    private String username;
     @Column(name = "senha")
     private String senha;
     @OneToMany(mappedBy = "funcionario")
