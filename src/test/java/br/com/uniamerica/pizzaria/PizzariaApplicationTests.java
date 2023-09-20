@@ -225,16 +225,18 @@ class PizzariaApplicationTests {
 	@Test
 	void testProdutoCriar(){
 		Produto produto = new Produto();
+		Pedido pedido = new Pedido();
 		Pizza pizzaTeste = new Pizza(1L, "Ca two piri", "BIG", "Nenhum", "Nenhum", produto);
-		var produto_request = produtoController.criar(new ProdutoDTO(1L, pizzaTeste, "Nenhum"));
+		var produto_request = produtoController.criar(new ProdutoDTO(1L, pizzaTeste, "Nenhum", pedido));
 		Assert.assertEquals("Produto cadastrado com sucesso", produto_request.getBody());
 	}
 
 	@Test
 	void testProdutoEditar(){
 		Produto produto = new Produto();
+		Pedido pedido = new Pedido();
 		Pizza pizzaTeste = new Pizza(1L, "Ca two piri", "BIG", "Nenhum", "Nenhum", produto);
-		var produtoTeste = produtoController.editar(new ProdutoDTO(1L,pizzaTeste, "Maionese"), 1L);
+		var produtoTeste = produtoController.editar(new ProdutoDTO(1L,pizzaTeste, "Maionese", pedido), 1L);
 		Assert.assertEquals("Produto editado com sucesso", produtoTeste.getBody());
 	}
 
@@ -247,8 +249,9 @@ class PizzariaApplicationTests {
 	@Test
 	void testProdutoFindById(){
 		Produto produto = new Produto();
+		Pedido pedido = new Pedido();
 		Pizza pizzaTeste = new Pizza(1L, "Ca two piri", "BIG", "Nenhum", "Nenhum", produto);
-		produtoController.criar(new ProdutoDTO(1L,pizzaTeste, "Kerischuque"));
+		produtoController.criar(new ProdutoDTO(1L,pizzaTeste, "Kerischuque", pedido));
 
 		var produtoTeste = produtoController.findById(1L);
 		Assert.assertEquals(produtoTeste.getBody().getIdProduto(), produtoController.findById(1L).getBody().getIdProduto());

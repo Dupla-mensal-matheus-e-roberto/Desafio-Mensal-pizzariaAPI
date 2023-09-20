@@ -1,5 +1,6 @@
 package br.com.uniamerica.pizzaria.dto;
 
+import br.com.uniamerica.pizzaria.entity.Pedido;
 import br.com.uniamerica.pizzaria.entity.Pizza;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -20,4 +21,6 @@ public class ProdutoDTO{
     @NotNull(message = "acompanhamentos inválidos")
     @NotBlank(message = "Campo acompanhamentos não pode ser vazio")
     private String acompanhamentos;
+    @NotNull(message = "pedido inválido")
+    private Pedido pedido;
 }
