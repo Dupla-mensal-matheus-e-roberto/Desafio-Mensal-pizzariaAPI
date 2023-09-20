@@ -22,7 +22,6 @@ public class FuncionarioService {
     }
 
     public FuncionarioDTO findById(Long id){
-        Assert.isTrue(id != null, "Insira um ID válido");
 
         Funcionario funcionarioTmp = funcionarioRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Funcionario não encontrado!"));
 
@@ -30,9 +29,6 @@ public class FuncionarioService {
     }
 
     public String createFuncionario(FuncionarioDTO funcionario) {
-
-        Assert.isTrue(funcionario.getNome() != null, "Insira um nome válido!");
-        Assert.isTrue(funcionario.getNome().length() > 2, "Insira um nome válido!");
 
         Funcionario funcionarioTmp = toFuncionario(funcionario);
 

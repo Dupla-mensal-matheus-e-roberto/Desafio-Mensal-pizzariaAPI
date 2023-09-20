@@ -21,17 +21,11 @@ public class ClienteService {
 
     public ClienteDTO findById(Long id) {
 
-        Assert.isTrue(id != null, "Insira um ID válido");
-
         Cliente clienteTmp = clienteRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Cliente não encontrado!"));
         return toDTO(clienteTmp);
     }
 
     public String createCliente(ClienteDTO cliente) {
-
-       Assert.isTrue(cliente.getNome() != null, "Insira um nome válido!");
-       Assert.isTrue(cliente.getNome().length() > 2, "Insira um nome válido!");
-       Assert.isTrue(cliente.getEndereco() != null, "Insira um endereço válido!");
 
        Cliente clienteTmp = toCliente(cliente);
 
