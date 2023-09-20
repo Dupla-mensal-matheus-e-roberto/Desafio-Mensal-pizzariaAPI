@@ -1,5 +1,6 @@
 package br.com.uniamerica.pizzaria.dto;
 
+import br.com.uniamerica.pizzaria.entity.Produto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -26,4 +27,6 @@ public class PizzaDTO {
     @NotNull(message = "removiveis inválidos")
     @NotBlank(message = "Campo removiveis não pode ser vazio")
     private String removiveis;
+    @NotNull(message = "produto inválido")
+    private Produto produto;
 }

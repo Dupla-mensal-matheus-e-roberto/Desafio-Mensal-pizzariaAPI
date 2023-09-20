@@ -1,11 +1,15 @@
 package br.com.uniamerica.pizzaria.dto;
 
+import br.com.uniamerica.pizzaria.entity.Pedido;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -26,4 +30,7 @@ public class ClienteDTO {
     @NotNull(message = "Senha inválida")
     @NotBlank(message = "Campo de senha não pode ser vazia")
     private String senha;
+    @NotNull(message = "pedidos inválidos")
+    @NotEmpty(message = "pedidos não podem ser vazios")
+    private List<Pedido> pedidos;
 }

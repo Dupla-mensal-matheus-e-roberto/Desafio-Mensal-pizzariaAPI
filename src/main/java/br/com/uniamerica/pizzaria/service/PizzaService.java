@@ -72,7 +72,7 @@ public class PizzaService {
         pizzaDTO.setRemoviveis(pizza.getRemoviveis());
         pizzaDTO.setTamanho(pizza.getTamanho());
         pizzaDTO.setSabores(pizza.getSabores());
-
+        pizzaDTO.setProduto(pizza.getProduto());
         return pizzaDTO;
     }
 
@@ -82,7 +82,7 @@ public class PizzaService {
         pizza.setRemoviveis(pizzaDTO.getRemoviveis());
         pizza.setTamanho(pizzaDTO.getTamanho());
         pizza.setSabores(pizzaDTO.getSabores());
-
+        pizza.setProduto(pizzaDTO.getProduto());
         return pizza;
     }
 

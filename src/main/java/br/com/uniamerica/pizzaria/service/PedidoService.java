@@ -62,21 +62,23 @@ public class PedidoService {
 
     public PedidoDTO toPedidoDto(Pedido pedido){
         PedidoDTO pedidoDTO = new PedidoDTO();
+        pedidoDTO.setIdPedido(pedido.getIdPedido());
         pedidoDTO.setCliente(pedido.getCliente());
         pedidoDTO.setDataDoPedido(pedido.getDataDoPedido());
         pedidoDTO.setStatus(pedido.getStatus());
         pedidoDTO.setProdutos(pedido.getProdutos());
-
+        pedidoDTO.setVendas(pedido.getVendas());
         return pedidoDTO;
     }
 
     public Pedido toPedido(PedidoDTO pedidoDTO){
         pedido = new Pedido();
+        pedido.setIdPedido(pedidoDTO.getIdPedido());
         pedido.setDataDoPedido(LocalDateTime.now());
         pedido.setStatus(pedidoDTO.getStatus());
         pedido.setProdutos(pedidoDTO.getProdutos());
         pedido.setCliente(pedidoDTO.getCliente());
-
+        pedido.setVendas(pedidoDTO.getVendas());
         return pedido;
     }
 }

@@ -2,6 +2,7 @@ package br.com.uniamerica.pizzaria.dto;
 
 import br.com.uniamerica.pizzaria.entity.Cliente;
 import br.com.uniamerica.pizzaria.entity.Produto;
+import br.com.uniamerica.pizzaria.entity.Venda;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -27,7 +28,10 @@ public class PedidoDTO{
     private String status;
     @NotNull(message = "cliente inválido")
     private Cliente cliente;
-    @NotNull(message = "produtos inválido")
+    @NotNull(message = "produtos inválidos")
     @NotEmpty(message = "Produtos não pode ser vazio")
     private List<Produto> produtos;
+    @NotNull(message = "vendas inválidas")
+    @NotEmpty(message = "Vendas não pode ser vazio")
+    private List<Venda> vendas;
 }

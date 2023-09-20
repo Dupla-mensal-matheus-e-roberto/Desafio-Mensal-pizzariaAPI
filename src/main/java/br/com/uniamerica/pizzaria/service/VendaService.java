@@ -78,6 +78,7 @@ public class VendaService {
 
     public Venda toVenda(VendaDTO vendaDTO){
         venda = new Venda();
+        venda.setIdVenda(vendaDTO.getIdVenda());
         venda.setFuncionario(vendaDTO.getFuncionario());
         venda.setPedido(vendaDTO.getPedido());
         venda.setTipoEntrega(vendaDTO.getTipoEntrega());

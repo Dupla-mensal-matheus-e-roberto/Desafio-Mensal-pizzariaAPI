@@ -64,13 +64,15 @@ public class ProdutoService {
         produtoDTO.setIdProduto(produto.getIdProduto());
         produtoDTO.setPizza(produto.getPizza());
         produtoDTO.setAcompanhamentos(produto.getAcompanhamentos());
-
+        produtoDTO.setPedido(produto.getPedido());
         return produtoDTO;
     }
     public Produto toProduto(ProdutoDTO produtoDTO){
         produto = new Produto();
+        produto.setIdProduto(produtoDTO.getIdProduto());
         produto.setPizza(produtoDTO.getPizza());
         produto.setAcompanhamentos(produtoDTO.getAcompanhamentos());
+        produto.setPedido(produtoDTO.getPedido());
 
         return produto;
     }

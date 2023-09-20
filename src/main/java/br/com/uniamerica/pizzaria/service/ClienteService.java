@@ -54,6 +54,9 @@ public class ClienteService {
         clienteDto.setIdCliente(cliente.getIdCliente());
         clienteDto.setNome(cliente.getNome());
         clienteDto.setEndereco(cliente.getEndereco());
+        clienteDto.setUsername(cliente.getUsername());
+        clienteDto.setSenha(cliente.getSenha());
+        clienteDto.setPedidos(cliente.getPedidos());
         return clienteDto;
     }
 
@@ -62,6 +65,9 @@ public class ClienteService {
         novoCliente.setIdCliente(clienteDTO.getIdCliente());
         novoCliente.setNome(clienteDTO.getNome());
         novoCliente.setEndereco(clienteDTO.getEndereco());
+        novoCliente.setUsername(clienteDTO.getUsername());
+        novoCliente.setSenha(clienteDTO.getSenha());
+        novoCliente.setPedidos(clienteDTO.getPedidos());
         return novoCliente;
     }
 
