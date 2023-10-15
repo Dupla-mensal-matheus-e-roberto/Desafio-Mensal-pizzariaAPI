@@ -56,14 +56,14 @@ public class PedidoService {
         return toPedidoDto(pedido1);
     }
 
-    public PedidoDTO deletar(Long id){
+    public String deletar(Long id){
         pedido = this.pedidoRepository.findById(id).orElse(null);
 
         Assert.isTrue(pedido != null, "Pedido Inválido");
 
         this.pedidoRepository.delete(pedido);
 
-        return toPedidoDto(pedido);
+        return "Pedido deletado com sucesso";
     }
 
     public PedidoDTO toPedidoDto(Pedido pedido){

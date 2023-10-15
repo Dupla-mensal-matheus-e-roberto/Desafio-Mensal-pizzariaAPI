@@ -38,19 +38,25 @@ public class FuncionarioService {
         return toDTO(funcionario1);
     }
 
-    public FuncionarioDTO updateFuncionario(FuncionarioDTO funcionario){
+    public FuncionarioDTO updateFuncionario(FuncionarioDTO funcionario, Long id){
 
-        Funcionario funcionario1 = funcionarioRepository.save(toFuncionario(funcionario));
+        Funcionario funcionariosalvo = funcionarioRepository.findById(id).orElse(null);
+
+        Funcionario funcionarioTmp = toFuncionario(funcionario);
+
+        funcionariosalvo = funcionarioTmp;
+
+        Funcionario funcionario1 = funcionarioRepository.save(funcionariosalvo);
 
         return toDTO(funcionario1);
     }
 
-    public FuncionarioDTO deleteFuncionario(Long id){
+    public String deleteFuncionario(Long id){
         Funcionario funcionario = this.funcionarioRepository.findById(id).orElse(null);
 
         funcionarioRepository.deleteById(id);
 
-        return toDTO(funcionario);
+        return "funcionario deletado com sucesso";
     }
 
     public FuncionarioDTO toDTO(Funcionario funcionario){

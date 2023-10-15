@@ -56,7 +56,7 @@ public class PedidoController {
     }
 
     @DeleteMapping("/deletar/{id}")
-    public ResponseEntity<PedidoDTO> deletar(@PathVariable("id") Long id){
+    public ResponseEntity<String> deletar(@PathVariable("id") Long id){
         try{
             return ResponseEntity.ok(this.pedidoService.deletar(id));
         } catch (Exception e){

@@ -63,12 +63,12 @@ public class FuncionarioController {
        if(!id.equals(funcionario.getIdFuncionario())) {
         return ResponseEntity.badRequest().build();
        }
-       return ResponseEntity.ok(funcionarioService.updateFuncionario(funcionario));
+       return ResponseEntity.ok(funcionarioService.updateFuncionario(funcionario, id));
     }
 
     /* [+] DELETAR [+] */
     @DeleteMapping("/deletar/{id}")
-    public ResponseEntity<FuncionarioDTO> deleteFuncionario(@PathVariable Long id){
+    public ResponseEntity<String> deleteFuncionario(@PathVariable Long id){
         try {
             return ResponseEntity.ok(this.funcionarioService.deleteFuncionario(id));
         }catch(Exception e){
