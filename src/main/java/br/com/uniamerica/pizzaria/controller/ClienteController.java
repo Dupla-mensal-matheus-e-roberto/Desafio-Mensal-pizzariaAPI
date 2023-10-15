@@ -48,8 +48,8 @@ public class ClienteController {
     @PostMapping("/criar")
     public ResponseEntity<ClienteDTO> createClient(@RequestBody ClienteDTO cliente) {
         try {
-            return ResponseEntity.ok(clientService.createCliente(cliente));
-
+            ClienteDTO clienteSalvo = clientService.createCliente(cliente);
+            return new ResponseEntity<>(clienteSalvo, HttpStatus.OK);
         } catch(Exception e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
@@ -62,13 +62,23 @@ public class ClienteController {
         if (!id.equals(cliente.getIdCliente())) {
             return ResponseEntity.badRequest().build();
         }
-        return ResponseEntity.ok(clientService.updateCliente(cliente));
+
+        ClienteDTO clienteEditar = clientService.updateCliente(cliente, id);
+        return new ResponseEntity<>(clienteEditar, HttpStatus.OK);
     }
 
     /* [+] DELETAR [+] */
 
     @DeleteMapping("/deletar/{id}")
-    public ResponseEntity<ClienteDTO> deleteClient(@PathVariable Long id) {
-        return ResponseEntity.ok(clientService.deleteCliente(id));
+    public ResponseEntity<ClienteDTO> deleteClient(@PathVariable("id") final Long id) {
+        try{
+
+            clientService.deleteCliente(id);
+            System.out.println(clientedeletar.getNome());
+            return ResponseEntity.ok(clientedeletar);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+
     }
 }

@@ -32,24 +32,33 @@ public class ClienteService {
 
        Cliente cliente2 = clienteRepository.save(clienteTmp);
 
-       return toDTO(cliente2);
+       return this.toDTO(cliente2);
 
     }
 
-    public ClienteDTO updateCliente(ClienteDTO clienteDTO) {
+    public ClienteDTO updateCliente(ClienteDTO clienteDTO, Long id) {
+
+        Cliente clientesalvo = clienteRepository.findById(id).orElse(null);
 
         Cliente clienteTmp = toCliente(clienteDTO);
 
-        Cliente clienteeditado = clienteRepository.save(clienteTmp);
+        clientesalvo = clienteTmp;
 
-        return toDTO(clienteeditado);
+        Cliente clienteeditado = clienteRepository.save(clientesalvo);
+
+        return this.toDTO(clienteeditado);
     }
 
-    public ClienteDTO deleteCliente(Long id) {
-        Cliente cliente = this.clienteRepository.findById(id).orElse(null);
+    public void deleteCliente(Long id) {
+        Cliente clientesalvo = clienteRepository.findById(id).orElse(null);
 
-        clienteRepository.deleteById(id);
-        return toDTO(cliente);
+        Assert.isTrue(clientesalvo.getNome() != null, "cade o nome mano?");
+
+        Assert.isTrue(clientesalvo != null, "Cliente inválido");
+
+        ClienteDTO clienteAntigo = new ClienteDTO();
+
+        this.clienteRepository.delete(clientesalvo);
     }
 
     public ClienteDTO toDTO(Cliente cliente){
