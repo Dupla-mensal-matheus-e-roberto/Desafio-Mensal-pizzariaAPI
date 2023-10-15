@@ -33,13 +33,15 @@ public class PedidoService {
 
         return toPedidoDto(pedidoBanco);
     }
-    public void criar(PedidoDTO pedidoDTO){
+    public PedidoDTO criar(PedidoDTO pedidoDTO){
         pedido = toPedido(pedidoDTO);
 
-        this.pedidoRepository.save(pedido);
+        Pedido pedido1 = this.pedidoRepository.save(pedido);
+
+        return toPedidoDto(pedido1);
     }
 
-    public void editar(PedidoDTO pedidoDTO, Long id){
+    public PedidoDTO editar(PedidoDTO pedidoDTO, Long id){
         pedido = this.pedidoRepository.findById(id).orElse(null);
 
         Assert.isTrue(pedido != null, "Pedido Inválido");
@@ -49,15 +51,19 @@ public class PedidoService {
         pedido.setProdutos(pedidoDTO.getProdutos());
         pedido.setCliente(pedidoDTO.getCliente());
 
-        this.pedidoRepository.save(pedido);
+        Pedido pedido1 = this.pedidoRepository.save(pedido);
+
+        return toPedidoDto(pedido1);
     }
 
-    public void deletar(Long id){
+    public PedidoDTO deletar(Long id){
         pedido = this.pedidoRepository.findById(id).orElse(null);
 
         Assert.isTrue(pedido != null, "Pedido Inválido");
 
         this.pedidoRepository.delete(pedido);
+
+        return toPedidoDto(pedido);
     }
 
     public PedidoDTO toPedidoDto(Pedido pedido){

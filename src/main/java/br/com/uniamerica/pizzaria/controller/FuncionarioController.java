@@ -48,7 +48,7 @@ public class FuncionarioController {
     /* [+] CADASTRAR [+] */
 
     @PostMapping("/criar")
-    public ResponseEntity<String> createFuncionario(@RequestBody FuncionarioDTO funcionario){
+    public ResponseEntity<FuncionarioDTO> createFuncionario(@RequestBody FuncionarioDTO funcionario){
         try{
             return ResponseEntity.ok(funcionarioService.createFuncionario(funcionario));
         }catch(Exception e){
@@ -59,7 +59,7 @@ public class FuncionarioController {
     /* [+] ATUALIZAR [+] */
 
     @PutMapping("/editar/{id}")
-    public ResponseEntity<String> updateFuncionario(@PathVariable Long id, @RequestBody FuncionarioDTO funcionario){
+        public ResponseEntity<FuncionarioDTO> updateFuncionario(@PathVariable Long id, @RequestBody FuncionarioDTO funcionario){
        if(!id.equals(funcionario.getIdFuncionario())) {
         return ResponseEntity.badRequest().build();
        }
@@ -68,10 +68,9 @@ public class FuncionarioController {
 
     /* [+] DELETAR [+] */
     @DeleteMapping("/deletar/{id}")
-    public ResponseEntity<String> deleteFuncionario(@PathVariable Long id){
+    public ResponseEntity<FuncionarioDTO> deleteFuncionario(@PathVariable Long id){
         try {
-            funcionarioService.deleteFuncionario(id);
-            return ResponseEntity.ok("Funcionario deletado com sucesso");
+            return ResponseEntity.ok(this.funcionarioService.deleteFuncionario(id));
         }catch(Exception e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }

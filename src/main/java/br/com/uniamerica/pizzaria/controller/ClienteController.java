@@ -46,7 +46,7 @@ public class ClienteController {
     /* [+] CADASTRAR [+]  */
 
     @PostMapping("/criar")
-    public ResponseEntity<String> createClient(@RequestBody ClienteDTO cliente) {
+    public ResponseEntity<ClienteDTO> createClient(@RequestBody ClienteDTO cliente) {
         try {
             return ResponseEntity.ok(clientService.createCliente(cliente));
 
@@ -58,7 +58,7 @@ public class ClienteController {
     /* [+] ATUALIZAR [+] */
 
     @PutMapping("/editar/{id}")
-    public ResponseEntity<String> updateClient(@PathVariable Long id, @RequestBody ClienteDTO cliente) {
+    public ResponseEntity<ClienteDTO> updateClient(@PathVariable Long id, @RequestBody ClienteDTO cliente) {
         if (!id.equals(cliente.getIdCliente())) {
             return ResponseEntity.badRequest().build();
         }
@@ -68,7 +68,7 @@ public class ClienteController {
     /* [+] DELETAR [+] */
 
     @DeleteMapping("/deletar/{id}")
-    public ResponseEntity<String> deleteClient(@PathVariable Long id) {
+    public ResponseEntity<ClienteDTO> deleteClient(@PathVariable Long id) {
         return ResponseEntity.ok(clientService.deleteCliente(id));
     }
 }

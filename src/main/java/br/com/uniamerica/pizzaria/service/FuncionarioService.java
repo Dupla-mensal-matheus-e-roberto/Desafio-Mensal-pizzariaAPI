@@ -2,6 +2,7 @@ package br.com.uniamerica.pizzaria.service;
 
 
 import br.com.uniamerica.pizzaria.dto.FuncionarioDTO;
+import br.com.uniamerica.pizzaria.entity.Cliente;
 import br.com.uniamerica.pizzaria.entity.Funcionario;
 import br.com.uniamerica.pizzaria.repository.FuncionarioRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -28,24 +29,28 @@ public class FuncionarioService {
         return toDTO(funcionarioTmp);
     }
 
-    public String createFuncionario(FuncionarioDTO funcionario) {
+    public FuncionarioDTO createFuncionario(FuncionarioDTO funcionario) {
 
         Funcionario funcionarioTmp = toFuncionario(funcionario);
 
-        funcionarioRepository.save(funcionarioTmp);
+        Funcionario funcionario1 = funcionarioRepository.save(funcionarioTmp);
 
-        return "Funcionario criado com sucesso!";
+        return toDTO(funcionario1);
     }
 
-    public String updateFuncionario(FuncionarioDTO funcionario){
+    public FuncionarioDTO updateFuncionario(FuncionarioDTO funcionario){
 
-        funcionarioRepository.save(toFuncionario(funcionario));
+        Funcionario funcionario1 = funcionarioRepository.save(toFuncionario(funcionario));
 
-        return "Funcionario editado com sucesso!";
+        return toDTO(funcionario1);
     }
 
-    public void deleteFuncionario(Long id){
+    public FuncionarioDTO deleteFuncionario(Long id){
+        Funcionario funcionario = this.funcionarioRepository.findById(id).orElse(null);
+
         funcionarioRepository.deleteById(id);
+
+        return toDTO(funcionario);
     }
 
     public FuncionarioDTO toDTO(Funcionario funcionario){

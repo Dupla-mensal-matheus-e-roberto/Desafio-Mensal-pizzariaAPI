@@ -1,5 +1,6 @@
 package br.com.uniamerica.pizzaria.service;
 
+import br.com.uniamerica.pizzaria.controller.ClienteController;
 import br.com.uniamerica.pizzaria.dto.ClienteDTO;
 import br.com.uniamerica.pizzaria.entity.Cliente;
 import br.com.uniamerica.pizzaria.repository.ClienteRepository;
@@ -25,28 +26,30 @@ public class ClienteService {
         return toDTO(clienteTmp);
     }
 
-    public String createCliente(ClienteDTO cliente) {
+    public ClienteDTO createCliente(ClienteDTO cliente) {
 
        Cliente clienteTmp = toCliente(cliente);
 
-       clienteRepository.save(clienteTmp);
+       Cliente cliente2 = clienteRepository.save(clienteTmp);
 
-       return "Cliente criado com sucesso!";
+       return toDTO(cliente2);
 
     }
 
-    public String updateCliente(ClienteDTO clienteDTO) {
+    public ClienteDTO updateCliente(ClienteDTO clienteDTO) {
 
         Cliente clienteTmp = toCliente(clienteDTO);
 
-        clienteRepository.save(clienteTmp);
+        Cliente clienteeditado = clienteRepository.save(clienteTmp);
 
-        return "Cliente editado com sucesso";
+        return toDTO(clienteeditado);
     }
 
-    public String deleteCliente(Long id) {
+    public ClienteDTO deleteCliente(Long id) {
+        Cliente cliente = this.clienteRepository.findById(id).orElse(null);
+
         clienteRepository.deleteById(id);
-        return "Cliente deletado com sucesso";
+        return toDTO(cliente);
     }
 
     public ClienteDTO toDTO(Cliente cliente){

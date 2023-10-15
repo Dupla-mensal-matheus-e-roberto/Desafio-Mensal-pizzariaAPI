@@ -37,30 +37,28 @@ public class PedidoController {
     }
 
     @PostMapping("/criar")
-    public ResponseEntity<String> criar(@RequestBody PedidoDTO pedidoDTO){
+    public ResponseEntity<PedidoDTO> criar(@RequestBody PedidoDTO pedidoDTO){
         try{
-            this.pedidoService.criar(pedidoDTO);
-            return ResponseEntity.ok("Pedido cadastrado com sucesso");
+            return ResponseEntity.ok(this.pedidoService.criar(pedidoDTO));
         } catch (Exception e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 
     @PutMapping("/editar/{id}")
-    public ResponseEntity<String> editar(@RequestBody PedidoDTO pedidoDTO, @PathVariable("id") Long id){
+    public ResponseEntity<PedidoDTO> editar(@RequestBody PedidoDTO pedidoDTO, @PathVariable("id") Long id){
         try{
-            this.pedidoService.editar(pedidoDTO, id);
-            return ResponseEntity.ok("Pedido editado com sucesso");
+
+            return ResponseEntity.ok(this.pedidoService.editar(pedidoDTO, id));
         } catch (Exception e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 
     @DeleteMapping("/deletar/{id}")
-    public ResponseEntity<String> deletar(@PathVariable("id") Long id){
+    public ResponseEntity<PedidoDTO> deletar(@PathVariable("id") Long id){
         try{
-            this.pedidoService.deletar(id);
-            return ResponseEntity.ok("Pedido deletado com sucesso");
+            return ResponseEntity.ok(this.pedidoService.deletar(id));
         } catch (Exception e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
