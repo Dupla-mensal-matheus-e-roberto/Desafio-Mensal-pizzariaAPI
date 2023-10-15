@@ -36,6 +36,8 @@ public class PedidoService {
     public PedidoDTO criar(PedidoDTO pedidoDTO){
         pedido = toPedido(pedidoDTO);
 
+        pedido.setDataDoPedido(LocalDateTime.now());
+
         Pedido pedido1 = this.pedidoRepository.save(pedido);
 
         return toPedidoDto(pedido1);
