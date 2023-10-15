@@ -78,6 +78,7 @@ public class PizzaService {
 
     public Pizza toPizza(PizzaDTO pizzaDTO){
         pizza = new Pizza();
+        pizza.setIdPizza(pizzaDTO.getIdPizza());
         pizza.setAdicionais(pizzaDTO.getAdicionais());
         pizza.setRemoviveis(pizzaDTO.getRemoviveis());
         pizza.setTamanho(pizzaDTO.getTamanho());

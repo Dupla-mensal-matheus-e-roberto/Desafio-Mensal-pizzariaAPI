@@ -19,6 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/funcionario")
+@CrossOrigin(origins = "http://localhost:4200")
 public class FuncionarioController {
 
     @Autowired
