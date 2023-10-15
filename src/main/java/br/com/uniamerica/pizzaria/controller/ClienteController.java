@@ -70,12 +70,9 @@ public class ClienteController {
     /* [+] DELETAR [+] */
 
     @DeleteMapping("/deletar/{id}")
-    public ResponseEntity<ClienteDTO> deleteClient(@PathVariable("id") final Long id) {
+    public ResponseEntity<String> deleteClient(@PathVariable("id") final Long id) {
         try{
-
-            clientService.deleteCliente(id);
-            System.out.println(clientedeletar.getNome());
-            return ResponseEntity.ok(clientedeletar);
+            return ResponseEntity.ok(clientService.deleteCliente(id));
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }

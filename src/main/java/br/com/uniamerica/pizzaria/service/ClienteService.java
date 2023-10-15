@@ -49,16 +49,12 @@ public class ClienteService {
         return this.toDTO(clienteeditado);
     }
 
-    public void deleteCliente(Long id) {
+    public String deleteCliente(Long id) {
         Cliente clientesalvo = clienteRepository.findById(id).orElse(null);
 
-        Assert.isTrue(clientesalvo.getNome() != null, "cade o nome mano?");
-
-        Assert.isTrue(clientesalvo != null, "Cliente inválido");
-
-        ClienteDTO clienteAntigo = new ClienteDTO();
-
         this.clienteRepository.delete(clientesalvo);
+
+        return "cliente deletado com sucesso";
     }
 
     public ClienteDTO toDTO(Cliente cliente){
