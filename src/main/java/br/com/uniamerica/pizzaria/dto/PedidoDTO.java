@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -22,7 +23,7 @@ public class PedidoDTO{
     @NotNull(message = "Indentificador inválido")
     private Long idPedido;
     @NotNull(message = "data do pedido inválida")
-    private LocalDateTime dataDoPedido;
+    private String dataDoPedido;
     @NotNull(message = "status do pedido inválido")
     @NotBlank(message = "Campo de status não pode ser vazio")
     private String status;

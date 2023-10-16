@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -21,7 +22,7 @@ public class Pedido {
     @Column(name = "id_pedido")
     private Long idPedido;
     @Column(name = "data_do_pedido")
-    private LocalDateTime dataDoPedido;
+    private String dataDoPedido;
     @Column(name = "status")
     private String status;
     @ManyToOne

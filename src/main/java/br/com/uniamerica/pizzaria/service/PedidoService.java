@@ -3,11 +3,13 @@ package br.com.uniamerica.pizzaria.service;
 import br.com.uniamerica.pizzaria.dto.PedidoDTO;
 import br.com.uniamerica.pizzaria.entity.Pedido;
 import br.com.uniamerica.pizzaria.repository.PedidoRepository;
+import org.hibernate.type.descriptor.DateTimeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +38,11 @@ public class PedidoService {
     public PedidoDTO criar(PedidoDTO pedidoDTO){
         pedido = toPedido(pedidoDTO);
 
-        pedido.setDataDoPedido(LocalDateTime.now());
+        LocalDateTime dateAtual = LocalDateTime.now();
+
+        DateTimeFormatter dataFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+
+        pedido.setDataDoPedido(dateAtual.format(dataFormat));
 
         Pedido pedido1 = this.pedidoRepository.save(pedido);
 
@@ -82,7 +88,7 @@ public class PedidoService {
     public Pedido toPedido(PedidoDTO pedidoDTO){
         pedido = new Pedido();
         pedido.setIdPedido(pedidoDTO.getIdPedido());
-        pedido.setDataDoPedido(LocalDateTime.now());
+        pedido.setDataDoPedido(pedidoDTO.getDataDoPedido());
         pedido.setStatus(pedidoDTO.getStatus());
         pedido.setProdutos(pedidoDTO.getProdutos());
         pedido.setCliente(pedidoDTO.getCliente());
