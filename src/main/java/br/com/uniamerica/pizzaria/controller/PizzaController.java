@@ -40,7 +40,7 @@ public class PizzaController {
     public ResponseEntity<String> criar(@RequestBody PizzaDTO pizzaDTO){
         try{
             this.pizzaService.criar(pizzaDTO);
-            return ResponseEntity.ok("Pizza cadastrada com sucesso");
+            return ResponseEntity.ok("");
         } catch (Exception e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
@@ -50,7 +50,7 @@ public class PizzaController {
     public ResponseEntity<String> editar(@RequestBody PizzaDTO pizzaDTO, @PathVariable("id") Long id){
         try{
             this.pizzaService.editar(pizzaDTO, id);
-            return ResponseEntity.ok("Pizza editada com sucesso");
+            return ResponseEntity.ok("");
         } catch(Exception e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
@@ -60,7 +60,7 @@ public class PizzaController {
     public ResponseEntity<String> deletar(@PathVariable("id") Long id){
         try{
             this.pizzaService.deletar(id);
-            return ResponseEntity.ok("Pizza deletada com sucesso");
+            return ResponseEntity.ok("");
         } catch (Exception e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
