@@ -1,5 +1,6 @@
 package br.com.uniamerica.pizzaria.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,6 +31,7 @@ public class Pedido {
     private Cliente cliente;
     @OneToMany(mappedBy = "pedido")
     private List<Produto> produtos;
+    @JsonIgnore
     @OneToMany(mappedBy = "pedido")
     private List<Venda> vendas;
 

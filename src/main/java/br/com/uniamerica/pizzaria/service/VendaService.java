@@ -18,14 +18,7 @@ public class VendaService {
     private Venda venda;
 
     public List<VendaDTO> getAll(){
-        List<Venda> listBanco = this.vendaRepository.findAll();
-        List<VendaDTO> listDTO = new ArrayList<>();
-
-        for(int i = 0; i < listBanco.size(); i++){
-            listDTO.add(toVendaDto(listBanco.get(i)));
-        }
-
-        return listDTO;
+        return vendaRepository.findAll().stream().map(this::toVendaDto).toList();
     }
 
     public VendaDTO findById(Long id){
@@ -36,25 +29,26 @@ public class VendaService {
         return toVendaDto(vendaBanco);
     }
 
-    public void criar(VendaDTO vendaDTO){
-        venda = toVenda(vendaDTO);
+    public VendaDTO criar(VendaDTO vendaDTO){
 
-        this.vendaRepository.save(venda);
+        Venda vendaTmp = toVenda(vendaDTO);
+
+        Venda venda2 = this.vendaRepository.save(vendaTmp);
+
+        return this.toVendaDto(venda2);
     }
 
-    public void editar(VendaDTO vendaDTO, Long id){
-        venda = this.vendaRepository.findById(id).orElse(null);
+    public VendaDTO editar(VendaDTO vendaDTO, Long id){
 
-        Assert.isTrue(venda != null, "Venda Inválida");
+        Venda vendasalva = this.vendaRepository.findById(id).orElse(null);
 
-        Assert.isTrue(vendaDTO != null, "Venda Inválida");
+        Venda vendaTmp = toVenda(vendaDTO);
 
-        venda.setFuncionario(vendaDTO.getFuncionario());
-        venda.setPedido(vendaDTO.getPedido());
-        venda.setTipoEntrega(vendaDTO.getTipoEntrega());
-        venda.setTipoPagamento(vendaDTO.getTipoPagamento());
+        vendasalva = vendaTmp;
 
-        this.vendaRepository.save(venda);
+        Venda vendaeditado = vendaRepository.save(vendasalva);
+
+        return this.toVendaDto(vendaeditado);
     }
 
     public void deletar(Long id){

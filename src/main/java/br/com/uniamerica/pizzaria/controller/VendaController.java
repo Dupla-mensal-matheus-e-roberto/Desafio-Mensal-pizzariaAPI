@@ -1,6 +1,7 @@
 package br.com.uniamerica.pizzaria.controller;
 
 import br.com.uniamerica.pizzaria.dto.VendaDTO;
+import br.com.uniamerica.pizzaria.entity.Venda;
 import br.com.uniamerica.pizzaria.service.VendaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,20 +37,18 @@ public class VendaController {
     }
 
     @PostMapping("/criar")
-    public ResponseEntity<String> criar(@RequestBody VendaDTO vendaDTO){
+    public ResponseEntity<VendaDTO> criar(@RequestBody VendaDTO vendaDTO){
         try{
-            this.vendaService.criar(vendaDTO);
-            return ResponseEntity.ok("Venda realizada com sucesso");
+            return ResponseEntity.ok(this.vendaService.criar(vendaDTO));
         } catch (Exception e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 
     @PutMapping("/editar/{id}")
-    public ResponseEntity<String> editar(@RequestBody VendaDTO vendaDTO, @PathVariable("id") Long id){
+    public ResponseEntity<VendaDTO> editar(@RequestBody VendaDTO vendaDTO, @PathVariable("id") Long id){
         try{
-            this.vendaService.editar(vendaDTO, id);
-            return ResponseEntity.ok("Venda editada com sucesso");
+            return ResponseEntity.ok(this.vendaService.editar(vendaDTO, id));
         } catch (Exception e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }

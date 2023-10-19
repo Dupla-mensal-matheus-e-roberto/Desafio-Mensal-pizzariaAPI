@@ -1,5 +1,6 @@
 package br.com.uniamerica.pizzaria.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,6 +26,7 @@ public class Funcionario {
     private String username;
     @Column(name = "senha")
     private String senha;
+    @JsonIgnore
     @OneToMany(mappedBy = "funcionario")
     private List<Venda> vendas;
 
