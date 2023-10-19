@@ -1,5 +1,6 @@
 package br.com.uniamerica.pizzaria.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,5 +28,6 @@ public class Pizza {
     private String removiveis;
     @OneToOne
     @JoinColumn(name = "id_pizza")
+    @JsonIgnore
     private Produto produto;
 }

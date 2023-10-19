@@ -37,20 +37,19 @@ public class ProdutoController {
     }
 
     @PostMapping("/criar")
-    public ResponseEntity<String> criar(@RequestBody ProdutoDTO produtoDTO){
+    public ResponseEntity<ProdutoDTO> criar(@RequestBody ProdutoDTO produtoDTO){
         try{
-            this.produtoService.criar(produtoDTO);
-            return ResponseEntity.ok("Produto cadastrado com sucesso");
+            return ResponseEntity.ok(this.produtoService.criar(produtoDTO));
         } catch (Exception e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 
     @PutMapping("/editar/{id}")
-    public ResponseEntity<String> editar(@RequestBody ProdutoDTO produtoDTO, @PathVariable("id") Long id){
+    public ResponseEntity<ProdutoDTO> editar(@RequestBody ProdutoDTO produtoDTO, @PathVariable("id") Long id){
         try{
-            this.produtoService.editar(produtoDTO, id);
-            return ResponseEntity.ok("Produto editado com sucesso");
+
+            return ResponseEntity.ok(this.produtoService.editar(produtoDTO, id));
         } catch(Exception e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }

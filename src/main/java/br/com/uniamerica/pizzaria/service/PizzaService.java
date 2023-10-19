@@ -18,14 +18,7 @@ public class PizzaService {
     private Pizza pizza;
 
     public List<PizzaDTO> getAll(){
-        List<Pizza> listBanco = this.pizzaRepository.findAll();
-        List<PizzaDTO> listDTO = new ArrayList<>();
-
-        for(int i = 0; i < listBanco.size(); i++){
-            listDTO.add(toPizzaDto(listBanco.get(i)));
-        }
-
-        return listDTO;
+        return pizzaRepository.findAll().stream().map(this::toPizzaDto).toList();
     }
 
     public PizzaDTO findById(Long id){
