@@ -34,13 +34,14 @@ public class ProdutoService {
         return toProdutoDto(produtoBanco);
     }
 
-    public void criar(ProdutoDTO produtoDTO){
+    public ProdutoDTO criar(ProdutoDTO produtoDTO){
         produto = toProduto(produtoDTO);
 
         this.produtoRepository.save(produto);
+        return produtoDTO;
     }
 
-    public void editar(ProdutoDTO produtoDTO, Long id){
+    public ProdutoDTO editar(ProdutoDTO produtoDTO, Long id){
         produto = this.produtoRepository.findById(id).orElse(null);
 
         Assert.isTrue( produto != null, "Produto Inválido");
@@ -49,6 +50,7 @@ public class ProdutoService {
         produto.setPizza(produtoDTO.getPizza());
 
         this.produtoRepository.save(produto);
+        return produtoDTO;
     }
 
     public void deletar(Long id){
