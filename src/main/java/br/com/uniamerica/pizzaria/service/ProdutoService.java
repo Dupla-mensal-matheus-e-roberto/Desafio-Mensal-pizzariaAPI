@@ -1,6 +1,8 @@
 package br.com.uniamerica.pizzaria.service;
 
+import br.com.uniamerica.pizzaria.dto.PedidoDTO;
 import br.com.uniamerica.pizzaria.dto.ProdutoDTO;
+import br.com.uniamerica.pizzaria.entity.Pedido;
 import br.com.uniamerica.pizzaria.entity.Produto;
 import br.com.uniamerica.pizzaria.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,9 @@ public class ProdutoService {
     @Autowired
     private ProdutoRepository produtoRepository;
     private Produto produto;
+
+    @Autowired
+    private PedidoService pedidoService;
 
     public List<ProdutoDTO> getAll(){
         List<Produto> listBanco = this.produtoRepository.findAll();
@@ -64,7 +69,14 @@ public class ProdutoService {
         produtoDTO.setIdProduto(produto.getIdProduto());
         produtoDTO.setPizza(produto.getPizza());
         produtoDTO.setAcompanhamentos(produto.getAcompanhamentos());
-        produtoDTO.setPedido(produto.getPedido());
+
+        List<PedidoDTO> listaTmp = new ArrayList<>();
+
+        for (int i=0; i < produto.getPedido().size() ;i++){
+            listaTmp.add(pedidoService.toPedidoDto(produto.getPedido().get(i)));
+        }
+
+        produtoDTO.setPedido(listaTmp);
         return produtoDTO;
     }
     public Produto toProduto(ProdutoDTO produtoDTO){
@@ -72,7 +84,15 @@ public class ProdutoService {
         produto.setIdProduto(produtoDTO.getIdProduto());
         produto.setPizza(produtoDTO.getPizza());
         produto.setAcompanhamentos(produtoDTO.getAcompanhamentos());
-        produto.setPedido(produtoDTO.getPedido());
+
+
+        List<Pedido> listaTmp = new ArrayList<>();
+
+        for (int i=0; i < produtoDTO.getPedido().size() ;i++){
+            listaTmp.add(pedidoService.toPedido(produtoDTO.getPedido().get(i)));
+        }
+
+        produto.setPedido(listaTmp);
 
         return produto;
     }

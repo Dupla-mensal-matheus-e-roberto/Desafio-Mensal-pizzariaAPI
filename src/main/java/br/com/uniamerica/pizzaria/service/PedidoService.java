@@ -1,7 +1,9 @@
 package br.com.uniamerica.pizzaria.service;
 
 import br.com.uniamerica.pizzaria.dto.PedidoDTO;
+import br.com.uniamerica.pizzaria.dto.ProdutoDTO;
 import br.com.uniamerica.pizzaria.entity.Pedido;
+import br.com.uniamerica.pizzaria.entity.Produto;
 import br.com.uniamerica.pizzaria.repository.PedidoRepository;
 import org.hibernate.type.descriptor.DateTimeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,10 +56,7 @@ public class PedidoService {
 
         Assert.isTrue(pedido != null, "Pedido Inválido");
 
-        pedido.setDataDoPedido(pedidoDTO.getDataDoPedido());
-        pedido.setStatus(pedidoDTO.getStatus());
-        pedido.setProdutos(pedidoDTO.getProdutos());
-        pedido.setCliente(pedidoDTO.getCliente());
+        pedido = toPedido(pedidoDTO);
 
         Pedido pedido1 = this.pedidoRepository.save(pedido);
 
@@ -80,7 +79,12 @@ public class PedidoService {
         pedidoDTO.setCliente(pedido.getCliente());
         pedidoDTO.setDataDoPedido(pedido.getDataDoPedido());
         pedidoDTO.setStatus(pedido.getStatus());
-        pedidoDTO.setProdutos(pedido.getProdutos());
+
+
+
+        //pedidoDTO.setProdutos(pedido.getProdutos());
+
+
         pedidoDTO.setVendas(pedido.getVendas());
         return pedidoDTO;
     }
@@ -90,9 +94,42 @@ public class PedidoService {
         pedido.setIdPedido(pedidoDTO.getIdPedido());
         pedido.setDataDoPedido(pedidoDTO.getDataDoPedido());
         pedido.setStatus(pedidoDTO.getStatus());
-        pedido.setProdutos(pedidoDTO.getProdutos());
+        //pedido.setProdutos(pedidoDTO.getProdutos());
         pedido.setCliente(pedidoDTO.getCliente());
         pedido.setVendas(pedidoDTO.getVendas());
         return pedido;
+    }
+
+    public ProdutoDTO toProdutoDto(Produto produto){
+        ProdutoDTO produtoDTO = new ProdutoDTO();
+        produtoDTO.setIdProduto(produto.getIdProduto());
+        produtoDTO.setPizza(produto.getPizza());
+        produtoDTO.setAcompanhamentos(produto.getAcompanhamentos());
+
+        List<PedidoDTO> listaTmp = new ArrayList<>();
+
+        for (int i=0; i < produto.getPedido().size() ;i++){
+            listaTmp.add(toPedidoDto(produto.getPedido().get(i)));
+        }
+
+        produtoDTO.setPedido(listaTmp);
+        return produtoDTO;
+    }
+    public Produto toProduto(ProdutoDTO produtoDTO){
+        Produto produto = new Produto();
+        produto.setIdProduto(produtoDTO.getIdProduto());
+        produto.setPizza(produtoDTO.getPizza());
+        produto.setAcompanhamentos(produtoDTO.getAcompanhamentos());
+
+
+        List<Pedido> listaTmp = new ArrayList<>();
+
+        for (int i=0; i < produtoDTO.getPedido().size() ;i++){
+            listaTmp.add(toPedido(produtoDTO.getPedido().get(i)));
+        }
+
+        produto.setPedido(listaTmp);
+
+        return produto;
     }
 }
