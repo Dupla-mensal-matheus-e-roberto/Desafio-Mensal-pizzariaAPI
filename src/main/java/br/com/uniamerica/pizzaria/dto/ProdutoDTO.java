@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -22,5 +24,5 @@ public class ProdutoDTO{
     @NotBlank(message = "Campo acompanhamentos não pode ser vazio")
     private String acompanhamentos;
     @NotNull(message = "pedido inválido")
-    private Pedido pedido;
+    private List<PedidoDTO> pedido;
 }

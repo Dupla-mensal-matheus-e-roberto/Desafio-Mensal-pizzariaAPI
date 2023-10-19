@@ -29,7 +29,10 @@ public class Pedido {
     @ManyToOne
     @JoinColumn(name = "id_cliente")
     private Cliente cliente;
-    @OneToMany(mappedBy = "pedido")
+    @ManyToMany
+    @JoinTable(name = "pedido_produto",
+            joinColumns = @JoinColumn(name = "pedido_id"),
+            inverseJoinColumns = @JoinColumn(name = "produto_id"))
     private List<Produto> produtos;
     @JsonIgnore
     @OneToMany(mappedBy = "pedido")
