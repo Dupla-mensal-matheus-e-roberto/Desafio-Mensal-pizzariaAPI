@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -24,9 +26,7 @@ public class PizzaDTO {
     @NotNull(message = "adicionais inválidos")
     @NotBlank(message = "Campo adicionais não pode ser vazio")
     private String adicionais;
-    @NotNull(message = "removiveis inválidos")
-    @NotBlank(message = "Campo removiveis não pode ser vazio")
     private String removiveis;
     @NotNull(message = "produto inválido")
-    private Produto produto;
+    private List<ProdutoDTO> produto;
 }

@@ -39,8 +39,12 @@ public class ProdutoController {
     @PostMapping("/criar")
     public ResponseEntity<ProdutoDTO> criar(@RequestBody ProdutoDTO produtoDTO){
         try{
+            System.out.println("aaaa");
             return ResponseEntity.ok(this.produtoService.criar(produtoDTO));
         } catch (Exception e){
+            System.out.println(e.getMessage());
+
+            System.out.println("bbbbb");
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }

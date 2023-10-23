@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Table(name = "pizzas", schema = "public")
 @Getter
@@ -26,8 +28,7 @@ public class Pizza {
     private String adicionais;
     @Column(name = "removiveis")
     private String removiveis;
-    @OneToOne
-    @JoinColumn(name = "id_pizza")
+    @ManyToMany(mappedBy = "pizzas")
     @JsonIgnore
-    private Produto produto;
+    private List<Produto> produto;
 }

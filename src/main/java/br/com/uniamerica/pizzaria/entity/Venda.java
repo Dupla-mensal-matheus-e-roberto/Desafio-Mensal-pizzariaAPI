@@ -27,5 +27,6 @@ public class Venda {
     @ManyToOne
     @JoinColumn(name = "id_funcionario")
     private Funcionario funcionario;
-
+    @Column(name = "valor_total")
+    private Float valorTotal;
 }

@@ -31,7 +31,15 @@ public class VendaService {
 
     public VendaDTO criar(VendaDTO vendaDTO){
 
+        Float valorTotal = 0F;
+
+        for(int i=0; i<vendaDTO.getPedido().getProdutos().size(); i++){
+            valorTotal = valorTotal + vendaDTO.getPedido().getProdutos().get(i).getPreco();
+        }
+
         Venda vendaTmp = toVenda(vendaDTO);
+
+        vendaTmp.setValorTotal(valorTotal);
 
         Venda venda2 = this.vendaRepository.save(vendaTmp);
 
@@ -40,11 +48,20 @@ public class VendaService {
 
     public VendaDTO editar(VendaDTO vendaDTO, Long id){
 
+        Float valorTotal = 0F;
+
+        for(int i=0; i<vendaDTO.getPedido().getProdutos().size(); i++){
+            valorTotal = valorTotal + vendaDTO.getPedido().getProdutos().get(i).getPreco();
+        }
+
+
         Venda vendasalva = this.vendaRepository.findById(id).orElse(null);
 
         Venda vendaTmp = toVenda(vendaDTO);
 
         vendasalva = vendaTmp;
+
+        vendasalva.setValorTotal(valorTotal);
 
         Venda vendaeditado = vendaRepository.save(vendasalva);
 
@@ -66,6 +83,7 @@ public class VendaService {
         vendaDTO.setPedido(venda.getPedido());
         vendaDTO.setTipoEntrega(venda.getTipoEntrega());
         vendaDTO.setTipoPagamento(venda.getTipoPagamento());
+        vendaDTO.setValorTotal(venda.getValorTotal());
 
         return vendaDTO;
     }
@@ -77,6 +95,7 @@ public class VendaService {
         venda.setPedido(vendaDTO.getPedido());
         venda.setTipoEntrega(vendaDTO.getTipoEntrega());
         venda.setTipoPagamento(vendaDTO.getTipoPagamento());
+        venda.setValorTotal(vendaDTO.getValorTotal());
 
         return venda;
     }

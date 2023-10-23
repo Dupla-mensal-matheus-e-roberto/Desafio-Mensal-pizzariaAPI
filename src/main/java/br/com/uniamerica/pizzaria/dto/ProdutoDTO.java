@@ -2,6 +2,7 @@ package br.com.uniamerica.pizzaria.dto;
 
 import br.com.uniamerica.pizzaria.entity.Pedido;
 import br.com.uniamerica.pizzaria.entity.Pizza;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -19,10 +20,12 @@ public class ProdutoDTO{
     @NotNull(message = "Indentificador inválido")
     private Long idProduto;
     @NotNull(message = "pizza inválida")
-    private Pizza pizza;
+    private List<PizzaDTO> pizzas;
     @NotNull(message = "acompanhamentos inválidos")
     @NotBlank(message = "Campo acompanhamentos não pode ser vazio")
     private String acompanhamentos;
-    @NotNull(message = "pedido inválido")
+    @NotNull(message = "Campo preco não pode ser vazio")
+    private Float preco;
+    @JsonIgnore
     private List<PedidoDTO> pedido;
 }

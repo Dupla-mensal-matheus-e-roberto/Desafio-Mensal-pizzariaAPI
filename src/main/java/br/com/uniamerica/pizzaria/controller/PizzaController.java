@@ -42,8 +42,8 @@ public class PizzaController {
             this.pizzaService.criar(pizzaDTO);
             return ResponseEntity.ok("");
         } catch (Exception e){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
-        }
+            System.out.println(e.getMessage());
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);        }
     }
 
     @PutMapping("/editar/{id}")
@@ -62,7 +62,7 @@ public class PizzaController {
             this.pizzaService.deletar(id);
             return ResponseEntity.ok("");
         } catch (Exception e){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 }

@@ -1,7 +1,9 @@
 package br.com.uniamerica.pizzaria.service;
 
 import br.com.uniamerica.pizzaria.dto.PizzaDTO;
+import br.com.uniamerica.pizzaria.dto.ProdutoDTO;
 import br.com.uniamerica.pizzaria.entity.Pizza;
+import br.com.uniamerica.pizzaria.entity.Produto;
 import br.com.uniamerica.pizzaria.repository.PizzaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,13 +34,67 @@ public class PizzaService {
     public void criar(PizzaDTO pizzaDTO){
         pizza = toPizza(pizzaDTO);
 
+        String tamanho = pizza.getTamanho();
+        String sabores = pizza.getSabores();
+
+        int numeroDeSabores = sabores.split(",\\s*").length;
+
+        boolean tamanhoValido = false;
+        int saboresPermitidos = switch (tamanho) {
+            case "G" -> {
+                tamanhoValido = true;
+                yield 3;
+            }
+            case "M" -> {
+                tamanhoValido = true;
+                yield 2;
+            }
+            case "P" -> {
+                tamanhoValido = true;
+                yield 1;
+            }
+            default -> throw new RuntimeException("Tamanho invalido");
+        };
+
+        if (tamanhoValido) {
+            if (!(numeroDeSabores <= saboresPermitidos)) {
+                throw new RuntimeException("Número de sabores inválidos");
+            }
+        }
+
         this.pizzaRepository.save(pizza);
     }
 
     public void editar(PizzaDTO pizzaDTO, Long id){
         pizza = this.pizzaRepository.findById(id).orElse(null);
 
-        Assert.isTrue(pizza != null, "Pizza Inválida");
+        String tamanho = pizza.getTamanho();
+        String sabores = pizza.getSabores();
+
+        int numeroDeSabores = sabores.split(",\\s*").length;
+
+        boolean tamanhoValido;
+        int saboresPermitidos = switch (tamanho) {
+            case "G" -> {
+                tamanhoValido = true;
+                yield 3;
+            }
+            case "M" -> {
+                tamanhoValido = true;
+                yield 2;
+            }
+            case "P" -> {
+                tamanhoValido = true;
+                yield 1;
+            }
+            default -> {
+                tamanhoValido = false;
+                throw new RuntimeException("Tamanho invalido");
+            }
+        };
+
+        Assert.isTrue(!(numeroDeSabores <= saboresPermitidos), "Numero de sabores incompatível com o tamanho");
+
 
         Assert.isTrue(pizzaDTO != null, "Pizza Inválida");
 
@@ -65,7 +121,8 @@ public class PizzaService {
         pizzaDTO.setRemoviveis(pizza.getRemoviveis());
         pizzaDTO.setTamanho(pizza.getTamanho());
         pizzaDTO.setSabores(pizza.getSabores());
-        pizzaDTO.setProduto(pizza.getProduto());
+
+
         return pizzaDTO;
     }
 
@@ -76,7 +133,7 @@ public class PizzaService {
         pizza.setRemoviveis(pizzaDTO.getRemoviveis());
         pizza.setTamanho(pizzaDTO.getTamanho());
         pizza.setSabores(pizzaDTO.getSabores());
-        pizza.setProduto(pizzaDTO.getProduto());
+
         return pizza;
     }
 

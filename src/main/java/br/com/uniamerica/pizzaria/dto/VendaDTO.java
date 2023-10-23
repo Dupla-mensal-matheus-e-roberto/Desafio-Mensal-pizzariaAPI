@@ -26,4 +26,6 @@ public class VendaDTO{
     private String tipoEntrega;
     @NotNull(message = "funcionario inválido")
     private Funcionario funcionario;
+    @NotNull(message = "valor total inválido")
+    private Float valorTotal;
 }
