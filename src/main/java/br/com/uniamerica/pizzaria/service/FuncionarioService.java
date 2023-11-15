@@ -63,8 +63,7 @@ public class FuncionarioService {
         FuncionarioDTO funcionarioDto = new FuncionarioDTO();
         funcionarioDto.setIdFuncionario(funcionario.getIdFuncionario());
         funcionarioDto.setNome(funcionario.getNome());
-        funcionarioDto.setUsername(funcionario.getUsername());
-        funcionarioDto.setSenha(funcionario.getSenha());
+        funcionarioDto.setUsuario(funcionario.getIdUsuario());
         funcionarioDto.setVendas(funcionario.getVendas());
         return funcionarioDto;
     }
@@ -73,8 +72,7 @@ public class FuncionarioService {
         Funcionario novoFuncionario = new Funcionario();
         novoFuncionario.setIdFuncionario(funcionarioDTO.getIdFuncionario());
         novoFuncionario.setNome(funcionarioDTO.getNome());
-        novoFuncionario.setUsername(funcionarioDTO.getUsername());
-        novoFuncionario.setSenha(funcionarioDTO.getUsername());
+        novoFuncionario.setIdUsuario(funcionarioDTO.getUsuario());
         novoFuncionario.setVendas(funcionarioDTO.getVendas());
         return novoFuncionario;
     }

@@ -22,10 +22,9 @@ public class Funcionario {
     private Long idFuncionario;
     @Column(name = "nome")
     private String nome;
-    @Column(name = "username")
-    private String username;
-    @Column(name = "senha")
-    private String senha;
+    @OneToOne
+    @JoinColumn(name = "id_usuario", unique = true)
+    private Usuario idUsuario;
     @JsonIgnore
     @OneToMany(mappedBy = "funcionario")
     private List<Venda> vendas;

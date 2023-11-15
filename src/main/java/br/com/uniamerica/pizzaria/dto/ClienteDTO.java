@@ -1,6 +1,7 @@
 package br.com.uniamerica.pizzaria.dto;
 
 import br.com.uniamerica.pizzaria.entity.Pedido;
+import br.com.uniamerica.pizzaria.entity.Usuario;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -24,12 +25,7 @@ public class ClienteDTO {
     @NotNull(message = "Endereço inválido")
     @NotBlank(message = "Campo de endereço não pode ser vazio")
     private String endereco;
-    @NotNull(message = "Username inválido")
-    @NotBlank(message = "Campo de username não pode ser vazio")
-    private String username;
-    @NotNull(message = "Senha inválida")
-    @NotBlank(message = "Campo de senha não pode ser vazia")
-    private String senha;
+    private Usuario usuario;
     @NotNull(message = "pedidos inválidos")
     @NotEmpty(message = "pedidos não podem ser vazios")
     private List<Pedido> pedidos;
