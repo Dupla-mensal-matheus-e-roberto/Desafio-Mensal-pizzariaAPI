@@ -1,16 +1,23 @@
 package br.com.uniamerica.pizzaria.service;
 
 import br.com.uniamerica.pizzaria.entity.Usuario;
+import br.com.uniamerica.pizzaria.repository.LoginRepository;
 import br.com.uniamerica.pizzaria.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UsuarioService implements UserDetailsService {
+
+    @Autowired
+    private LoginRepository loginRepository;
 
     @Autowired
     private UsuarioRepository usuarioRepository;
@@ -20,20 +27,28 @@ public class UsuarioService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        var usuario = usuarioRepository.findByUsername((username));
+        Optional<Usuario> usuarioOptional = loginRepository.findByUsername(username);
 
-        if(usuario != null){
-            return (UserDetails) usuario;
+        if (usuarioOptional.isPresent()) {
+            Usuario usuario = usuarioOptional.get();
+
+            UserDetails userDetails = User.builder()
+                    .username(usuario.getUsername())
+                    .password(usuario.getPassword())
+                    .roles("ROLE_USER")
+                    .build();
+
+            return userDetails;
         }
 
         throw new UsernameNotFoundException("Não encontrado");
     }
 
-    public String criarUsuario(Usuario user) throws Exception {
+    public Usuario criarUsuario(Usuario user) throws Exception {
 
-        Usuario username = usuarioRepository.findByUsername(user.getUsername());
+        Optional<Usuario> username = loginRepository.findByUsername(user.getUsername());
 
-        if(user.getUsername().equals(username)){
+        if(username.isPresent()){
             throw new Exception("Username está em uso");
         }
 
@@ -44,7 +59,7 @@ public class UsuarioService implements UserDetailsService {
         var usersalvo = usuarioRepository.save(user);
 
 
-        return "Usuario cadastrado";
+        return user;
     }
 
 }

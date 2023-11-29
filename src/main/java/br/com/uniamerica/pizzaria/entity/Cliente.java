@@ -25,9 +25,6 @@ public class Cliente {
     private String nome;
     @Column(name = "endereco")
     private String endereco;
-    @OneToOne
-    @JoinColumn(name = "id_usuario", unique = true)
-    private Usuario idUsuario;
     @JsonIgnore
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos;

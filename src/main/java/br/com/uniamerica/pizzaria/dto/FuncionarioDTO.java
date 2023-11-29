@@ -22,7 +22,6 @@ public class FuncionarioDTO {
     @NotNull(message = "Nome inválido")
     @NotBlank(message = "campo nome não pode ser vazio")
     private String nome;
-    private Usuario usuario;
     @NotNull(message = "Lista inválida")
     @NotEmpty(message = "Vendas não pode ser vazia")
     private List<Venda> vendas;

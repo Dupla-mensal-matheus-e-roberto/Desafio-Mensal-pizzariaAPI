@@ -22,9 +22,6 @@ public class Funcionario {
     private Long idFuncionario;
     @Column(name = "nome")
     private String nome;
-    @OneToOne
-    @JoinColumn(name = "id_usuario", unique = true)
-    private Usuario idUsuario;
     @JsonIgnore
     @OneToMany(mappedBy = "funcionario")
     private List<Venda> vendas;

@@ -39,6 +39,7 @@ public class ClienteController {
         try{
             return ResponseEntity.ok(this.clientService.findById(id));
         } catch (Exception e){
+            System.out.println(e.getMessage());
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
@@ -51,6 +52,7 @@ public class ClienteController {
             ClienteDTO clienteSalvo = clientService.createCliente(cliente);
             return new ResponseEntity<>(clienteSalvo, HttpStatus.OK);
         } catch(Exception e){
+            System.out.println(e.getMessage());
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }

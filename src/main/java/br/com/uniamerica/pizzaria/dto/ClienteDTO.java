@@ -25,7 +25,6 @@ public class ClienteDTO {
     @NotNull(message = "Endereço inválido")
     @NotBlank(message = "Campo de endereço não pode ser vazio")
     private String endereco;
-    private Usuario usuario;
     @NotNull(message = "pedidos inválidos")
     @NotEmpty(message = "pedidos não podem ser vazios")
     private List<Pedido> pedidos;

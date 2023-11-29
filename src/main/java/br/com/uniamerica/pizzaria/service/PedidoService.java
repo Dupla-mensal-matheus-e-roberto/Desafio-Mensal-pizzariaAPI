@@ -31,7 +31,8 @@ public class PedidoService {
         List<PedidoDTO> listDTO = new ArrayList<>();
 
         for(int i = 0; i < listBanco.size(); i++){
-            listDTO.add(toPedidoDto(listBanco.get(i)));
+            if(!listBanco.get(i).getStatus().contains("Finalizado"))
+                listDTO.add(toPedidoDto(listBanco.get(i)));
         }
 
         return listDTO;

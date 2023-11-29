@@ -1,7 +1,9 @@
 package br.com.uniamerica.pizzaria.service;
 
 import br.com.uniamerica.pizzaria.dto.VendaDTO;
+import br.com.uniamerica.pizzaria.entity.Pedido;
 import br.com.uniamerica.pizzaria.entity.Venda;
+import br.com.uniamerica.pizzaria.repository.PedidoRepository;
 import br.com.uniamerica.pizzaria.repository.VendaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,9 @@ public class VendaService {
 
     @Autowired
     private VendaRepository vendaRepository;
+    @Autowired
+    private PedidoRepository pedidoRepository;
+
     private Venda venda;
 
     public List<VendaDTO> getAll(){
@@ -39,11 +44,15 @@ public class VendaService {
 
         Venda vendaTmp = toVenda(vendaDTO);
 
+        vendaTmp.getPedido().setStatus("Finalizado!");
         vendaTmp.setValorTotal(valorTotal);
 
+        Pedido pedido = vendaTmp.getPedido();
+
+        pedidoRepository.save(pedido);
         Venda venda2 = this.vendaRepository.save(vendaTmp);
 
-        return this.toVendaDto(venda2);
+        return vendaDTO;
     }
 
     public VendaDTO editar(VendaDTO vendaDTO, Long id){

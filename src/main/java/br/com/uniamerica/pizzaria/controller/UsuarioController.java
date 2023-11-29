@@ -18,9 +18,10 @@ public class UsuarioController {
     @PostMapping("/cadastrar")
     public ResponseEntity<?> criarUsuario(@RequestBody Usuario user) throws Exception {
         try {
-            return ResponseEntity.ok(usuarioService.criarUsuario(user));
+            Usuario usuario = usuarioService.criarUsuario(user);
+            return ResponseEntity.ok(usuario);
         } catch (Exception e){
-            throw new Exception(e.getMessage());
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
 
     }
