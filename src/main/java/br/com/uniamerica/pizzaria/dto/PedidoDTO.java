@@ -32,7 +32,4 @@ public class PedidoDTO{
     @NotNull(message = "produtos inválidos")
     @NotEmpty(message = "Produtos não pode ser vazio")
     private List<ProdutoDTO> produtos;
-    @NotNull(message = "vendas inválidas")
-    @NotEmpty(message = "Vendas não pode ser vazio")
-    private List<Venda> vendas;
 }
